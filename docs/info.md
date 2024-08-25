@@ -9,12 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+A voltage controlled oscillator (VCO).
 
 ## How to test
 
-Explain how to use your project
+Connect a control voltage to the input pin and observe the oscillating signal at the output pin.
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+DC power supply for the control voltage, oscilloscope for monitoring the output.
