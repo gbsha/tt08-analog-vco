@@ -58,6 +58,8 @@ pinout:
   ua[1]: "control"
   ua[2]: "output"
   ua[3]: "monitor"
+  ua[4]: ""
+  ua[5]: ""
 
 # Do not change!
 yaml_version: 6
