@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cp vco_stage_${1}.sch vco_stage.sch
+
