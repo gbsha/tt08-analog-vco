@@ -6,21 +6,25 @@ V {}
 S {}
 E {}
 B 2 -1250 -970 -450 -570 {flags=graph
-y1=-2.8e-16
-y2=0.01
+y1=-1.3
+y2=1.8
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=1.129
-x2=1.129
+x1=-1.8
+x2=1.8
 divx=5
 subdivx=1
 xlabmag=1.0
 ylabmag=1.0
-node=vout
-color=4
+node="vout
+vn
+
+vnout
+vpout"
+color="4 6 10 4"
 dataset=-1
 unitx=1
 logx=0
@@ -96,7 +100,7 @@ N -720 -1250 -720 -1210 {
 lab=VDD}
 C {devices/launcher.sym} -210 -870 0 0 {name=h5
 descr="load waves" 
-tclcommand="xschem raw_read $netlist_dir/vco_stage_tb.raw"
+tclcommand="xschem raw_read $netlist_dir/vco_stage_tb.raw dc"
 }
 C {devices/lab_wire.sym} -110 -1080 2 1 {name=p4 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} -110 -1260 0 0 {name=p6 sig_type=std_logic lab=VDD}
@@ -108,11 +112,11 @@ C {devices/code_shown.sym} -270 -610 0 0 {name=NGSPICE
 only_toplevel=false 
 value="
 .param vdd=1.8
-.param cl=2p
+.param cl=0p
 
-.param vcm=1.129
+.param vcm=0.7
 
-.param icont=0.25m
+.param icont=0.01m
 
 .control
 
@@ -120,6 +124,7 @@ value="
     save @m.x1.xm3.msky130_fd_pr__pfet_01v8[id] @m.x1.xm3.msky130_fd_pr__pfet_01v8[gm] @m.x1.xm3.msky130_fd_pr__pfet_01v8[gds]
     save @m.x1.xm1.msky130_fd_pr__nfet_01v8[id] @m.x1.xm1.msky130_fd_pr__nfet_01v8[gm] @m.x1.xm1.msky130_fd_pr__nfet_01v8[gds]
     save @m.x1.xm5.msky130_fd_pr__nfet_01v8[id] @m.x1.xm5.msky130_fd_pr__nfet_01v8[gm] @m.x1.xm5.msky130_fd_pr__nfet_01v8[gds]
+    save @m.x1.xm7.msky130_fd_pr__pfet_01v8[id] @m.x1.xm7.msky130_fd_pr__pfet_01v8[gm] @m.x1.xm7.msky130_fd_pr__pfet_01v8[gds]
 
     * operating point
     op
@@ -128,7 +133,7 @@ value="
     set appendwrite
 
     * run ac simulation
-    dc vdm 0. 1.8 0.1
+    dc vdm -1.8 1.8 0.1
 
     write vco_stage_tb.raw
     quit
@@ -141,7 +146,7 @@ C {devices/lab_pin.sym} 150 -1210 2 0 {name=p25 sig_type=std_logic lab=Vpout}
 C {devices/lab_pin.sym} 150 -1130 2 0 {name=p26 sig_type=std_logic lab=Vnout}
 C {devices/vcvs.sym} 370 -1160 0 1 {name=E1 value=0.5}
 C {devices/vcvs.sym} 530 -1160 0 0 {name=E2 value=-0.5}
-C {devices/vsource.sym} 270 -1040 0 0 {name=Vdm value="0." savecurrent=false}
+C {devices/vsource.sym} 270 -1040 0 0 {name=Vdm value="1.8" savecurrent=false}
 C {devices/vsource.sym} 450 -1040 0 0 {name=Vcm value=\{vcm\} savecurrent=false}
 C {devices/gnd.sym} 270 -990 0 0 {name=l5 lab=GND}
 C {devices/gnd.sym} 450 -990 0 0 {name=l6 lab=GND}
@@ -167,7 +172,7 @@ C {devices/lab_wire.sym} -530 -1190 0 0 {name=p16 sig_type=std_logic lab=VDD}
 C {devices/lab_wire.sym} -530 -1070 2 1 {name=p17 sig_type=std_logic lab=VSS}
 C {devices/isource.sym} -720 -1180 0 0 {name=I0 value=\{icont\}}
 C {devices/lab_wire.sym} -720 -1250 0 0 {name=p18 sig_type=std_logic lab=VDD}
-C {devices/code_shown.sym} 80 -690 0 0 {name=SETUP
+C {devices/code_shown.sym} -410 -770 0 0 {name=SETUP
 simulator=ngspice
 only_toplevel=false
 value="
