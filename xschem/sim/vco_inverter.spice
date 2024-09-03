@@ -1,0 +1,7 @@
+** sch_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco_inverter.sch
+.subckt vco_inverter VDD Vin Vout VSS
+*.PININFO VDD:B VSS:B Vin:I Vout:O
+XM1 Vout Vin VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM2 Vout Vin VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+.ends
+.end
