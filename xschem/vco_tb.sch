@@ -6,15 +6,15 @@ V {}
 S {}
 E {}
 B 2 -1130 -860 -330 -460 {flags=graph
-y1=-0.11
+y1=-0.00049
 y2=1.9
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=1.2370591e-05
-x2=1.4844492e-05
+x1=0
+x2=2e-05
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -38,8 +38,8 @@ ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=1.2370591e-05
-x2=1.4844492e-05
+x1=0
+x2=2e-05
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -102,15 +102,18 @@ C {devices/code_shown.sym} 10 -490 0 0 {name=NGSPICE
 only_toplevel=false 
 value="
 .param cl=1p
-.param icont=0.04m
-.param WLcap=8
+.param icont=0.25m
+.param WLcap=11
 .param WLp=8
+.param W=4
+.param L=2
+.param Lb=0.25
 
-.ic v(Vp)=1.8 v(Vn)=0.
-
+*.ic v(Vp)=1.8 v(Vn)=0.
+.option klu
 .control
 	save all
-	tran 10n 20000n
+	tran 10n 40000n
 	let PERIOD=2.1e-6
 	meas tran PERIOD TRIG Vp VAL=0.5 RISE=5 TARG Vp VAL=0.5 RISE=6
 	meas tran vp_avg AVG vp from=1000n to=9000n
@@ -142,7 +145,7 @@ only_toplevel=false
 value="
 .lib /foss/pdks/sky130A/libs.tech/combined/sky130.lib.spice tt
 
-.temp 27
+.temp 100
 "}
 C {vco.sym} -60 -690 0 0 {name=x1}
 C {devices/lab_wire.sym} -30 -630 3 0 {name=p8 sig_type=std_logic lab=Vp0}

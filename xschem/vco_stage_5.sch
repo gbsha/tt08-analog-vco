@@ -83,8 +83,26 @@ N 0 0 20 0 {
 lab=VSS}
 N 0 30 20 30 {
 lab=VSS}
-N 220 -140 220 -130 {
+N 80 -30 130 -30 {
 lab=Vnout}
+N 170 -30 240 -30 {
+lab=VDD}
+N 170 -60 240 -60 {
+lab=VDD}
+N 240 -60 240 -0 {
+lab=VDD}
+N 170 0 240 -0 {
+lab=VDD}
+N -130 -30 -80 -30 {
+lab=Vpout}
+N -240 -30 -170 -30 {
+lab=VDD}
+N -240 -60 -170 -60 {
+lab=VDD}
+N -240 -60 -240 0 {
+lab=VDD}
+N -240 0 -170 0 {
+lab=VDD}
 N 220 -140 220 -120 {
 lab=Vnout}
 N 80 -120 220 -120 {
@@ -226,3 +244,33 @@ sa=0 sb=0 sd=0
 model=nfet_01v8
 spiceprefix=X
 }
+C {sky130_fd_pr/pfet_01v8.sym} 150 -30 0 0 {name=M10
+L=\{WLp\}
+W=\{WLp\}
+nf=1
+mult=1
+ad="'int((nf+1)/2) * W/nf * 0.29'" 
+pd="'2*int((nf+1)/2) * (W/nf + 0.29)'"
+as="'int((nf+2)/2) * W/nf * 0.29'" 
+ps="'2*int((nf+2)/2) * (W/nf + 0.29)'"
+nrd="'0.29 / W'" nrs="'0.29 / W'"
+sa=0 sb=0 sd=0
+model=pfet_01v8
+spiceprefix=X
+}
+C {devices/lab_pin.sym} 240 -30 0 1 {name=p12 sig_type=std_logic lab=VDD}
+C {sky130_fd_pr/pfet_01v8.sym} -150 -30 0 1 {name=M11
+L=\{WLp\}
+W=\{WLp\}
+nf=1
+mult=1
+ad="'int((nf+1)/2) * W/nf * 0.29'" 
+pd="'2*int((nf+1)/2) * (W/nf + 0.29)'"
+as="'int((nf+2)/2) * W/nf * 0.29'" 
+ps="'2*int((nf+2)/2) * (W/nf + 0.29)'"
+nrd="'0.29 / W'" nrs="'0.29 / W'"
+sa=0 sb=0 sd=0
+model=pfet_01v8
+spiceprefix=X
+}
+C {devices/lab_pin.sym} -240 -30 0 0 {name=p13 sig_type=std_logic lab=VDD}
