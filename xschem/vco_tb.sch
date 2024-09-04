@@ -143,9 +143,9 @@ C {devices/code_shown.sym} -150 -1030 0 0 {name=SETUP
 simulator=ngspice
 only_toplevel=false
 value="
-.lib /foss/pdks/sky130A/libs.tech/combined/sky130.lib.spice tt
+.lib /foss/pdks/sky130A/libs.tech/combined/sky130.lib.spice fs
 
-.temp 100
+.temp 27
 "}
 C {vco.sym} -60 -690 0 0 {name=x1}
 C {devices/lab_wire.sym} -30 -630 3 0 {name=p8 sig_type=std_logic lab=Vp0}

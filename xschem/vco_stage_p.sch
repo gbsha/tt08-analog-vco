@@ -195,7 +195,6 @@ sa=0 sb=0 sd=0
 model=pfet_01v8
 spiceprefix=X
 }
-C {devices/ipin.sym} -280 -170 2 1 {name=p10 lab=Vb}
 C {sky130_fd_pr/nfet_01v8.sym} -40 -80 0 0 {name=M8
 L=\{WLcap\}
 W=\{WLcap\}
@@ -224,3 +223,4 @@ sa=0 sb=0 sd=0
 model=nfet_01v8
 spiceprefix=X
 }
+C {devices/lab_pin.sym} -280 -170 2 1 {name=p10 sig_type=std_logic lab=Vb}
