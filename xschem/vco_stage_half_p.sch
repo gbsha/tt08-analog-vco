@@ -62,8 +62,8 @@ C {devices/opin.sym} -80 0 0 1 {name=p8 lab=Vout}
 C {devices/opin.sym} -70 260 3 1 {name=p3 lab=Vs}
 C {devices/opin.sym} 560 0 2 1 {name=p7 lab=Vbuf}
 C {sky130_fd_pr/pfet_01v8.sym} 90 -120 0 1 {name=M7
-L=2
-W=4
+L=\{L\}
+W=\{W\}
 nf=2
 mult=1
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
@@ -76,8 +76,8 @@ model=pfet_01v8
 spiceprefix=X
 }
 C {sky130_fd_pr/pfet_01v8.sym} -90 -120 0 0 {name=M3
-L=2
-W=4
+L=\{L\}
+W=\{W\}
 nf=2
 mult=1
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
@@ -90,8 +90,8 @@ model=pfet_01v8
 spiceprefix=X
 }
 C {sky130_fd_pr/nfet_01v8.sym} -90 150 0 0 {name=M1
-L=2
-W=4
+L=\{L\}
+W=\{W\}
 nf=2
 mult=1
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
@@ -107,8 +107,8 @@ C {vco_buffer.sym} 380 0 0 0 {name=x1}
 C {devices/lab_pin.sym} 380 70 2 0 {name=p5 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} 380 -70 2 0 {name=p6 sig_type=std_logic lab=VDD}
 C {sky130_fd_pr/nfet_01v8.sym} 80 80 0 0 {name=M8
-L=11
-W=11
+L=\{WLcap\}
+W=\{WLcap\}
 nf=1
 mult=1
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
