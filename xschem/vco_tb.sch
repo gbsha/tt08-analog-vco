@@ -13,8 +13,8 @@ ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=7.9177077e-06
-x2=1.7721059e-05
+x1=8.6995862e-06
+x2=1.7734355e-05
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -38,8 +38,8 @@ ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=7.9177077e-06
-x2=1.7721059e-05
+x1=8.6995862e-06
+x2=1.7734355e-05
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -76,9 +76,9 @@ lab=VDD}
 N 170 -680 250 -680 {
 lab=GND}
 N -250 -710 -250 -690 {
-lab=#net1}
+lab=Vc}
 N -250 -690 -210 -690 {
-lab=#net1}
+lab=Vc}
 N -250 -810 -250 -770 {
 lab=VDD}
 C {devices/launcher.sym} -180 -220 0 0 {name=h5
@@ -111,7 +111,7 @@ value="
 	meas tran vp_avg AVG x1.x6.vp from=1000n to=9000n
 
 	meas tran vb_avg AVG vb from=1n to=9n
-	meas tran vc_avg AVG x1.vc from=1n to=9n
+	meas tran vc_avg AVG vc from=1n to=9n
 	remzerovec
 	write vco_tb.raw
 	quit
@@ -142,3 +142,4 @@ C {devices/lab_wire.sym} -130 -630 3 0 {name=p16 sig_type=std_logic lab=Vn1}
 C {devices/lab_wire.sym} -110 -630 3 0 {name=p17 sig_type=std_logic lab=Vn2}
 C {devices/lab_wire.sym} -90 -630 3 0 {name=p18 sig_type=std_logic lab=Vn3}
 C {devices/lab_wire.sym} 90 -690 0 1 {name=p4 sig_type=std_logic lab=Vb}
+C {devices/lab_wire.sym} -250 -690 2 1 {name=p6 sig_type=std_logic lab=Vc}

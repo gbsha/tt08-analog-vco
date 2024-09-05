@@ -35,24 +35,19 @@ N -300 -60 -220 -60 {
 lab=Icont}
 N -220 -60 -220 20 {
 lab=Icont}
-N -160 50 -160 90 {
-lab=Icont}
-N -160 90 -20 90 {
-lab=Icont}
-N 40 90 60 90 {
-lab=Vc}
 N -40 -70 -20 -70 {
 lab=Vb}
 N -20 -70 60 -70 {
 lab=Vb}
+N -80 -100 -80 -70 {
+lab=VDD}
 C {devices/iopin.sym} -80 -200 3 0 {name=p1 lab=VDD}
 C {devices/iopin.sym} -80 160 1 0 {name=p7 lab=VSS}
 C {devices/ipin.sym} -300 -60 0 0 {name=p5 lab=Icont}
 C {devices/opin.sym} 60 -70 0 0 {name=p8 lab=Vb}
-C {devices/opin.sym} 60 90 0 0 {name=p2 lab=Vc}
 C {sky130_fd_pr/nfet_01v8.sym} -200 50 0 1 {name=M1
-L=\{L\}
-W=\{W\}
+L=2
+W=4
 nf=2
 mult=1
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
@@ -65,8 +60,8 @@ model=nfet_01v8
 spiceprefix=X
 }
 C {sky130_fd_pr/nfet_01v8.sym} -100 50 0 0 {name=M2
-L=\{L\}
-W=\{W\}
+L=2
+W=4
 nf=2
 mult=1
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
@@ -78,10 +73,9 @@ sa=0 sb=0 sd=0
 model=nfet_01v8
 spiceprefix=X
 }
-C {devices/vsource.sym} 10 90 1 0 {name=V1 value=0 savecurrent=false}
 C {sky130_fd_pr/pfet_01v8.sym} -60 -70 0 1 {name=M3
-L=\{Lb\}
-W=\{W\}
+L=0.25
+W=4
 nf=1
 mult=1
 ad="'int((nf+1)/2) * W/nf * 0.29'" 

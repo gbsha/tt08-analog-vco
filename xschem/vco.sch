@@ -34,7 +34,6 @@ C {devices/lab_pin.sym} 150 -110 2 0 {name=p4 sig_type=std_logic lab=Vb}
 C {devices/lab_wire.sym} 0 -30 2 1 {name=p6 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 0 -150 0 0 {name=p7 sig_type=std_logic lab=VDD}
 C {devices/lab_wire.sym} -190 -90 0 0 {name=p8 sig_type=std_logic lab=Icont}
-C {devices/lab_pin.sym} 150 -70 2 0 {name=p9 sig_type=std_logic lab=Vc}
 C {vco_bias.sym} 0 -90 0 0 {name=x1}
 C {vco_core.sym} 0 90 0 0 {name=x6}
 C {devices/lab_wire.sym} -150 110 0 0 {name=p5 sig_type=std_logic lab=Icont}
