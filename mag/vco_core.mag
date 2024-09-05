@@ -1,6 +1,6 @@
 magic
 tech sky130A
-timestamp 1725567059
+timestamp 1725572295
 << metal1 >>
 rect -1300 3635 -555 3735
 rect 2735 3635 2995 3735
@@ -144,19 +144,19 @@ rect 6575 -1725 6580 -1635
 rect 6505 -1870 6580 -1725
 rect 6185 -1925 6580 -1870
 use vco_stage  x1
-timestamp 1725560742
+timestamp 1725572295
 transform 1 0 -1400 0 1 980
 box 840 -1650 4135 2760
 use vco_stage  x2
-timestamp 1725560742
+timestamp 1725572295
 transform -1 0 7130 0 1 980
 box 840 -1650 4135 2760
 use vco_stage  x3
-timestamp 1725560742
+timestamp 1725572295
 transform -1 0 7130 0 -1 -2320
 box 840 -1650 4135 2760
 use vco_stage  x4
-timestamp 1725560742
+timestamp 1725572295
 transform 1 0 -1400 0 -1 -2320
 box 840 -1650 4135 2760
 << labels >>

@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1725560742
+timestamp 1725572295
 << locali >>
 rect 4280 -1550 5680 -1320
 rect 4280 -2290 4400 -1550
@@ -158,15 +158,15 @@ rect 8070 -1650 8270 -1580
 rect 4800 -1740 8270 -1650
 rect 8070 -1800 8270 -1740
 use sky130_fd_pr__nfet_01v8_XVWV9B  sky130_fd_pr__nfet_01v8_XVWV9B_1
-timestamp 1725469944
+timestamp 1725569918
 transform 1 0 4975 0 1 -1920
 box -625 -410 625 410
 use vco_stage_half  vco_stage_half_0
-timestamp 1725531458
+timestamp 1725572295
 transform 1 0 260 0 1 2060
 box 1430 -5360 4720 3450
 use vco_stage_half  vco_stage_half_1
-timestamp 1725531458
+timestamp 1725572295
 transform -1 0 9700 0 1 2060
 box 1430 -5360 4720 3450
 << labels >>
