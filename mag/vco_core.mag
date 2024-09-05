@@ -1,0 +1,95 @@
+magic
+tech sky130A
+timestamp 1725561892
+<< metal1 >>
+rect -3826 3670 -3726 3770
+rect 2735 3635 2995 3735
+rect -3826 3470 -3726 3570
+rect -3826 3270 -3726 3370
+rect -3826 3070 -3726 3170
+rect -3826 2870 -3726 2970
+rect -3826 2670 -3726 2770
+rect 2735 2765 2995 2865
+rect -3826 2470 -3726 2570
+rect -3826 2270 -3726 2370
+rect -3826 2070 -3726 2170
+rect -3826 1870 -3726 1970
+rect -3826 1670 -3726 1770
+rect -3826 1470 -3726 1570
+rect 2655 1330 2715 2115
+rect 2655 1280 3075 1330
+rect 3015 465 3075 1280
+rect 2635 270 2735 290
+rect 2635 265 2900 270
+rect 2635 230 2835 265
+rect 2735 210 2835 230
+rect 2830 135 2835 210
+rect 2895 135 2900 265
+rect 2830 130 2900 135
+rect 2735 -500 2995 -400
+rect 2735 -670 2995 -570
+rect 2735 -5075 3230 -4975
+<< via1 >>
+rect 2835 135 2895 265
+<< metal2 >>
+rect 2830 265 2900 270
+rect 2830 135 2835 265
+rect 2895 135 2900 265
+rect 2830 130 2900 135
+<< via2 >>
+rect 2835 135 2895 265
+<< metal3 >>
+rect 2830 265 2900 270
+rect 2830 135 2835 265
+rect 2895 135 2900 265
+rect 2830 130 2900 135
+<< via3 >>
+rect 2835 135 2895 265
+<< metal4 >>
+rect 2830 265 2900 270
+rect 2830 135 2835 265
+rect 2895 190 2900 265
+rect 2895 135 2995 190
+rect 2830 130 2995 135
+use vco_stage  x1
+timestamp 1725560742
+transform 1 0 -1400 0 1 980
+box 840 -1650 4135 2760
+use vco_stage  x2
+timestamp 1725560742
+transform -1 0 7130 0 1 980
+box 840 -1650 4135 2760
+use vco_stage  x3
+timestamp 1725560742
+transform -1 0 8387 0 -1 -3299
+box 840 -1650 4135 2760
+use vco_stage  x4
+timestamp 1725560742
+transform 1 0 -1400 0 -1 -2320
+box 840 -1650 4135 2760
+<< labels >>
+flabel metal1 -3826 3670 -3726 3770 0 FreeSans 128 0 0 0 VDD
+port 0 nsew
+flabel metal1 -3826 3470 -3726 3570 0 FreeSans 128 0 0 0 VSS
+port 1 nsew
+flabel metal1 -3826 3270 -3726 3370 0 FreeSans 128 0 0 0 Vb
+port 2 nsew
+flabel metal1 -3826 3070 -3726 3170 0 FreeSans 128 0 0 0 Vc
+port 3 nsew
+flabel metal1 -3826 2870 -3726 2970 0 FreeSans 128 0 0 0 Vp0
+port 4 nsew
+flabel metal1 -3826 2670 -3726 2770 0 FreeSans 128 0 0 0 Vp1
+port 5 nsew
+flabel metal1 -3826 2470 -3726 2570 0 FreeSans 128 0 0 0 Vp2
+port 6 nsew
+flabel metal1 -3826 2270 -3726 2370 0 FreeSans 128 0 0 0 Vp3
+port 7 nsew
+flabel metal1 -3826 2070 -3726 2170 0 FreeSans 128 0 0 0 Vn0
+port 8 nsew
+flabel metal1 -3826 1870 -3726 1970 0 FreeSans 128 0 0 0 Vn1
+port 9 nsew
+flabel metal1 -3826 1670 -3726 1770 0 FreeSans 128 0 0 0 Vn2
+port 10 nsew
+flabel metal1 -3826 1470 -3726 1570 0 FreeSans 128 0 0 0 Vn3
+port 11 nsew
+<< end >>
