@@ -1,6 +1,6 @@
 magic
 tech sky130A
-timestamp 1725566553
+timestamp 1725567059
 << metal1 >>
 rect -1300 3635 -555 3735
 rect 2735 3635 2995 3735
@@ -172,10 +172,6 @@ flabel metal1 795 3155 895 3255 0 FreeSans 128 0 0 0 Vp0
 port 4 nsew
 flabel metal1 1285 3155 1385 3255 0 FreeSans 128 0 0 0 Vn0
 port 8 nsew
-flabel metal1 4345 3155 4445 3255 0 FreeSans 128 0 0 0 Vp1
-port 5 nsew
-flabel metal1 4835 3155 4935 3255 0 FreeSans 128 0 0 0 Vn1
-port 9 nsew
 flabel metal1 4835 -4595 4935 -4495 0 FreeSans 128 0 0 0 Vp2
 port 6 nsew
 flabel metal1 4345 -4595 4445 -4495 0 FreeSans 128 0 0 0 Vn2
@@ -184,4 +180,8 @@ flabel metal1 795 -4595 895 -4495 0 FreeSans 128 0 0 0 Vp3
 port 7 nsew
 flabel metal1 1285 -4595 1385 -4495 0 FreeSans 128 0 0 0 Vn3
 port 11 nsew
+flabel metal1 4345 3155 4445 3255 0 FreeSans 128 0 0 0 Vn1
+port 9 nsew
+flabel metal1 4835 3155 4935 3255 0 FreeSans 128 0 0 0 Vp1
+port 5 nsew
 << end >>
