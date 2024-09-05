@@ -62,8 +62,8 @@ C {devices/lab_pin.sym} 150 -170 0 1 {name=p15 sig_type=std_logic lab=Vds_m5}
 C {devices/lab_pin.sym} -170 10 2 1 {name=p16 sig_type=std_logic lab=Vpout}
 C {devices/lab_pin.sym} -170 -150 2 1 {name=p17 sig_type=std_logic lab=Vnout}
 C {sky130_fd_pr/nfet_01v8.sym} -20 250 0 0 {name=M5
-L=\{L\}
-W=\{W\}
+L=2
+W=4
 nf=2
 mult=1
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
