@@ -1,0 +1,428 @@
+* SPICE3 file created from tt_um_georgboecherer_vco.ext - technology: sky130A
+
+.subckt sky130_fd_pr__nfet_01v8_XVWV9B a_n429_n288# a_29_n288# a_n589_n374# a_n487_n200#
++ a_n29_n200# a_429_n200#
+X0 a_n29_n200# a_n429_n288# a_n487_n200# a_n589_n374# sky130_fd_pr__nfet_01v8 ad=0.29 pd=2.29 as=0.58 ps=4.58 w=2 l=2
+X1 a_429_n200# a_29_n288# a_n29_n200# a_n589_n374# sky130_fd_pr__nfet_01v8 ad=0.58 pd=4.58 as=0.29 ps=2.29 w=2 l=2
+C0 a_n487_n200# a_n29_n200# 0.061965f
+C1 a_n29_n200# a_29_n288# 0.068501f
+C2 a_n429_n288# a_n487_n200# 0.068501f
+C3 a_n429_n288# a_29_n288# 0.104496f
+C4 a_n429_n288# a_n29_n200# 0.068501f
+C5 a_429_n200# a_29_n288# 0.068501f
+C6 a_429_n200# a_n29_n200# 0.061965f
+C7 a_429_n200# a_n589_n374# 0.272611f
+C8 a_n29_n200# a_n589_n374# 0.115415f
+C9 a_n487_n200# a_n589_n374# 0.272611f
+C10 a_29_n288# a_n589_n374# 1.24623f
+C11 a_n429_n288# a_n589_n374# 1.24623f
+.ends
+
+.subckt sky130_fd_pr__pfet_01v8_NDBSV3 a_25_n400# w_n221_n619# a_n33_n497# a_n83_n400#
++ VSUBS
+X0 a_25_n400# a_n33_n497# a_n83_n400# w_n221_n619# sky130_fd_pr__pfet_01v8 ad=1.16 pd=8.58 as=1.16 ps=8.58 w=4 l=0.25
+C0 a_n83_n400# a_25_n400# 0.521156f
+C1 a_25_n400# a_n33_n497# 0.033082f
+C2 w_n221_n619# a_n83_n400# 0.268076f
+C3 w_n221_n619# a_n33_n497# 0.233157f
+C4 w_n221_n619# a_25_n400# 0.268076f
+C5 a_n83_n400# a_n33_n497# 0.033082f
+C6 a_25_n400# VSUBS 0.178394f
+C7 a_n83_n400# VSUBS 0.178394f
+C8 a_n33_n497# VSUBS 0.130915f
+C9 w_n221_n619# VSUBS 2.36948f
+.ends
+
+.subckt vco_bias VDD Icont Vb VSS
+XXM1 Icont Icont VSS VSS Icont VSS sky130_fd_pr__nfet_01v8_XVWV9B
+XXM2 Icont Icont VSS VSS Vb VSS sky130_fd_pr__nfet_01v8_XVWV9B
+XXM3 VDD VDD Vb Vb VSS sky130_fd_pr__pfet_01v8_NDBSV3
+C0 VDD Vb 1.55911f
+C1 Icont Vb 0.631784f
+C2 VDD VSS 3.714961f
+C3 Vb VSS 1.11715f
+C4 Icont VSS 8.756597f
+.ends
+
+.subckt sky130_fd_pr__nfet_01v8_64Z3AY a_15_n131# a_n175_n243# a_n33_91# a_n73_n131#
+X0 a_15_n131# a_n33_91# a_n73_n131# a_n175_n243# sky130_fd_pr__nfet_01v8 ad=0.29 pd=2.58 as=0.29 ps=2.58 w=1 l=0.15
+C0 a_n73_n131# a_15_n131# 0.162113f
+C1 a_n33_91# a_15_n131# 0.015495f
+C2 a_n33_91# a_n73_n131# 0.015495f
+C3 a_15_n131# a_n175_n243# 0.13771f
+C4 a_n73_n131# a_n175_n243# 0.13771f
+C5 a_n33_91# a_n175_n243# 0.218066f
+.ends
+
+.subckt sky130_fd_pr__pfet_01v8_LGS3BL a_n73_n64# a_n33_n161# a_15_n64# w_n211_n284#
++ VSUBS
+X0 a_15_n64# a_n33_n161# a_n73_n64# w_n211_n284# sky130_fd_pr__pfet_01v8 ad=0.29 pd=2.58 as=0.29 ps=2.58 w=1 l=0.15
+C0 a_n33_n161# a_n73_n64# 0.014592f
+C1 a_15_n64# a_n73_n64# 0.162113f
+C2 a_15_n64# a_n33_n161# 0.014592f
+C3 w_n211_n284# a_n73_n64# 0.085834f
+C4 w_n211_n284# a_n33_n161# 0.143569f
+C5 a_15_n64# w_n211_n284# 0.085834f
+C6 a_15_n64# VSUBS 0.051727f
+C7 a_n73_n64# VSUBS 0.051727f
+C8 a_n33_n161# VSUBS 0.080264f
+C9 w_n211_n284# VSUBS 1.10443f
+.ends
+
+.subckt vco_inverter VDD Vin Vout VSS
+XXM1 Vout VSS Vin VSS sky130_fd_pr__nfet_01v8_64Z3AY
+XXM2 VDD Vin Vout VDD VSS sky130_fd_pr__pfet_01v8_LGS3BL
+C0 Vout Vin 0.105089f
+C1 VDD Vin 0.223634f
+C2 VDD Vout 0.255776f
+C3 Vout VSS 0.501366f
+C4 Vin VSS 0.529811f
+C5 VDD VSS 1.845717f
+.ends
+
+.subckt vco_buffer VDD Vin Vout vco_inverter_1/Vin VSS
+Xvco_inverter_0 VDD Vin vco_inverter_1/Vin VSS vco_inverter
+Xvco_inverter_1 VDD vco_inverter_1/Vin Vout VSS vco_inverter
+C0 VDD vco_inverter_1/Vin 0.032909f
+C1 Vout VSS 0.257269f
+C2 vco_inverter_1/Vin VSS 0.427107f
+C3 VDD VSS 2.958784f
+C4 Vin VSS 0.318811f
+.ends
+
+.subckt sky130_fd_pr__pfet_01v8_GJP7VV a_29_n297# w_n625_n419# a_n487_n200# a_n29_n200#
++ a_n429_n297# a_429_n200# VSUBS
+X0 a_429_n200# a_29_n297# a_n29_n200# w_n625_n419# sky130_fd_pr__pfet_01v8 ad=0.58 pd=4.58 as=0.29 ps=2.29 w=2 l=2
+X1 a_n29_n200# a_n429_n297# a_n487_n200# w_n625_n419# sky130_fd_pr__pfet_01v8 ad=0.29 pd=2.29 as=0.58 ps=4.58 w=2 l=2
+C0 w_n625_n419# a_n29_n200# 0.021348f
+C1 a_29_n297# a_429_n200# 0.068501f
+C2 a_n429_n297# a_n29_n200# 0.068501f
+C3 a_n429_n297# w_n625_n419# 0.702872f
+C4 a_n29_n200# a_29_n297# 0.068501f
+C5 w_n625_n419# a_29_n297# 0.702872f
+C6 a_n29_n200# a_n487_n200# 0.061965f
+C7 a_n29_n200# a_429_n200# 0.061965f
+C8 a_n429_n297# a_29_n297# 0.109462f
+C9 w_n625_n419# a_n487_n200# 0.146182f
+C10 w_n625_n419# a_429_n200# 0.146182f
+C11 a_n429_n297# a_n487_n200# 0.068501f
+C12 a_429_n200# VSUBS 0.125992f
+C13 a_n29_n200# VSUBS 0.093629f
+C14 a_n487_n200# VSUBS 0.125992f
+C15 a_29_n297# VSUBS 0.571068f
+C16 a_n429_n297# VSUBS 0.571068f
+C17 w_n625_n419# VSUBS 4.07841f
+.ends
+
+.subckt sky130_fd_pr__nfet_01v8_APRB2X a_1100_n1100# a_n1260_n1274# a_n1100_n1188#
++ a_n1158_n1100#
+X0 a_1100_n1100# a_n1100_n1188# a_n1158_n1100# a_n1260_n1274# sky130_fd_pr__nfet_01v8 ad=3.19 pd=22.58 as=3.19 ps=22.58 w=11 l=11
+C0 a_n1158_n1100# a_n1100_n1188# 0.467312f
+C1 a_n1100_n1188# a_1100_n1100# 0.467312f
+C2 a_1100_n1100# a_n1260_n1274# 1.62288f
+C3 a_n1158_n1100# a_n1260_n1274# 1.62288f
+C4 a_n1100_n1188# a_n1260_n1274# 7.0066f
+.ends
+
+.subckt vco_stage_half Vin Vb Vd Vs Vout VDD VSS Vbuf
+Xvco_buffer_0 VDD Vout Vbuf vco_buffer_0/vco_inverter_1/Vin VSS vco_buffer
+XXM1 Vin Vin VSS Vs Vout Vs sky130_fd_pr__nfet_01v8_XVWV9B
+XXM3 Vb VDD Vout VDD Vb Vout VSS sky130_fd_pr__pfet_01v8_GJP7VV
+XXM7 Vd VDD Vout VDD Vd Vout VSS sky130_fd_pr__pfet_01v8_GJP7VV
+XXM8 VSS VSS Vout VSS sky130_fd_pr__nfet_01v8_APRB2X
+C0 Vd Vout 0.421513f
+C1 Vout vco_buffer_0/vco_inverter_1/Vin 0.016373f
+C2 Vout Vb 0.614399f
+C3 Vout VDD 1.615056f
+C4 Vout Vin 0.975623f
+C5 Vs Vin 0.305547f
+C6 Vd Vb 0.274334f
+C7 Vbuf Vb 0.058457f
+C8 Vd VDD 1.643926f
+C9 Vbuf VDD 1.176826f
+C10 vco_buffer_0/vco_inverter_1/Vin VDD 0.223918f
+C11 Vout Vs 0.012735f
+C12 VDD Vb 2.839385f
+C13 Vout VSS 14.616648f
+C14 Vd VSS 0.913466f
+C15 Vb VSS 1.937704f
+C16 Vs VSS 2.948963f
+C17 Vin VSS 6.631261f
+C18 Vbuf VSS 0.224886f
+C19 vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C20 VDD VSS 19.868738f
+.ends
+
+.subckt vco_stage Vc Vnbuf Vn Vnout Vp Vpout VDD Vb Vpbuf VSS
+Xvco_stage_half_0 Vp Vb Vnout vco_stage_half_1/Vs Vpout VDD VSS Vpbuf vco_stage_half
+Xvco_stage_half_1 Vn Vb Vpout vco_stage_half_1/Vs Vnout VDD VSS Vnbuf vco_stage_half
+Xsky130_fd_pr__nfet_01v8_XVWV9B_1 Vc Vc VSS vco_stage_half_1/Vs VSS vco_stage_half_1/Vs
++ sky130_fd_pr__nfet_01v8_XVWV9B
+C0 Vpout VDD 0.468219f
+C1 vco_stage_half_1/Vs Vc 1.347028f
+C2 vco_stage_half_1/Vs Vpout 0.075155f
+C3 Vpout Vb 0.023231f
+C4 Vnbuf Vpbuf 0.010602f
+C5 Vnout Vp 1.443379f
+C6 VDD Vb -0.010358f
+C7 Vp Vc 0.165236f
+C8 Vp Vpout 0.571528f
+C9 Vnout Vc 0.084314f
+C10 Vn Vp 0.644373f
+C11 Vnout Vpout 3.773397f
+C12 Vnout Vn 0.499567f
+C13 Vc Vpout 0.233795f
+C14 vco_stage_half_1/Vs Vp 0.045697f
+C15 Vnout VDD 0.884707f
+C16 Vn Vc 0.058835f
+C17 Vn Vpout 0.964109f
+C18 Vnout Vb 0.033f
+C19 Vc VSS 13.169113f
+C20 Vnout VSS 12.742411f
+C21 Vb VSS 2.716905f
+C22 Vn VSS 3.518342f
+C23 Vnbuf VSS 0.195959f
+C24 vco_stage_half_1/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C25 VDD VSS 34.914097f
+C26 Vpout VSS 13.058118f
+C27 vco_stage_half_1/Vs VSS 1.851849f
+C28 Vp VSS 3.660438f
+C29 Vpbuf VSS 0.195959f
+C30 vco_stage_half_0/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+.ends
+
+.subckt vco_core Vb Vc Vp0 Vp1 Vp2 Vp3 Vn0 Vn1 Vn2 Vn3 x3/Vp x1/Vp x4/Vn x2/Vp x3/Vn
++ x1/Vn VSS VDD
+Xx1 Vc Vn0 x1/Vn x2/Vn x1/Vp x2/Vp VDD Vb Vp0 VSS vco_stage
+Xx2 Vc Vn1 x2/Vn x3/Vn x2/Vp x3/Vp VDD Vb Vp1 VSS vco_stage
+Xx3 Vc Vn2 x3/Vn x4/Vn x3/Vp x4/Vp VDD Vb Vp2 VSS vco_stage
+Xx4 Vc Vn3 x4/Vn x1/Vp x4/Vp x1/Vn VDD Vb Vp3 VSS vco_stage
+C0 x1/Vp VDD 0.038289f
+C1 VDD Vb 6.954284f
+C2 x2/Vp x3/Vn 0.022623f
+C3 x3/Vn x2/Vn 0.603904f
+C4 x3/Vn x3/Vp 1.343421f
+C5 VDD x4/Vn 0.039812f
+C6 x2/Vp x2/Vn 0.055856f
+C7 x2/Vp x3/Vp 0.030453f
+C8 Vc x3/Vn 0.119786f
+C9 x1/Vn x4/Vp 0.064207f
+C10 x2/Vp Vc 0.017422f
+C11 VDD x3/Vn 0.056817f
+C12 x4/Vp x1/Vp 0.047067f
+C13 VDD x2/Vn 0.040183f
+C14 VDD x3/Vp 0.015692f
+C15 x4/Vp Vb 0.035059f
+C16 x1/Vn x1/Vp 1.307495f
+C17 x4/Vp x4/Vn 0.031414f
+C18 x1/Vn Vb 2.113836f
+C19 x1/Vp Vb 0.018402f
+C20 x4/Vp x3/Vn 0.038969f
+C21 x1/Vp x4/Vn 0.603904f
+C22 x4/Vn Vb 0.019994f
+C23 x4/Vp x3/Vp 0.049001f
+C24 x2/Vp x1/Vn 0.109448f
+C25 x1/Vn x2/Vn 0.033244f
+C26 x4/Vp Vc 0.017422f
+C27 x3/Vn Vb 0.033459f
+C28 x4/Vp VDD 0.015241f
+C29 x2/Vp x1/Vp 0.086901f
+C30 x1/Vp x2/Vn 0.021344f
+C31 x3/Vn x4/Vn 0.057964f
+C32 x2/Vp Vb 0.043217f
+C33 Vb x2/Vn 0.019335f
+C34 x3/Vp Vb 1.660721f
+C35 x1/Vp Vc 0.246512f
+C36 Vc VSS 11.187104f
+C37 x1/Vp VSS 14.950257f
+C38 Vb VSS 15.26556f
+C39 Vn3 VSS 0.195959f
+C40 x4/vco_stage_half_1/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C41 VDD VSS 0.146705p
+C42 x1/Vn VSS 15.922879f
+C43 x4/vco_stage_half_1/Vs VSS 1.412919f
+C44 Vp3 VSS 0.195959f
+C45 x4/vco_stage_half_0/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C46 x4/Vn VSS 16.111938f
+C47 Vn2 VSS 0.195959f
+C48 x3/vco_stage_half_1/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C49 x4/Vp VSS 14.278998f
+C50 x3/vco_stage_half_1/Vs VSS 1.412919f
+C51 Vp2 VSS 0.195959f
+C52 x3/vco_stage_half_0/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C53 x3/Vn VSS 15.270806f
+C54 Vn1 VSS 0.195959f
+C55 x2/vco_stage_half_1/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C56 x3/Vp VSS 15.23536f
+C57 x2/vco_stage_half_1/Vs VSS 1.412919f
+C58 Vp1 VSS 0.195959f
+C59 x2/vco_stage_half_0/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C60 x2/Vn VSS 16.12204f
+C61 Vn0 VSS 0.195959f
+C62 x1/vco_stage_half_1/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C63 x2/Vp VSS 14.261634f
+C64 x1/vco_stage_half_1/Vs VSS 1.412919f
+C65 Vp0 VSS 0.195959f
+C66 x1/vco_stage_half_0/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+.ends
+
+.subckt vco Icont Vp0 Vp1 Vp2 Vp3 Vn0 Vn1 Vn2 Vn3 Vb x6/x1/Vn x6/x3/Vp x6/x4/Vn x6/x2/Vp
++ x6/x3/Vn VDD VSS
+Xx1 VDD Icont Vb VSS vco_bias
+Xx6 Vb Icont Vp0 Vp1 Vp2 Vp3 Vn0 Vn1 Vn2 Vn3 x6/x3/Vp x6/x1/Vp x6/x4/Vn x6/x2/Vp x6/x3/Vn
++ x6/x1/Vn VSS VDD vco_core
+C0 Icont x6/x1/Vp 0.1781f
+C1 x6/x1/Vn Vb 0.01251f
+C2 Icont Vb 0.235857f
+C3 x6/x1/Vn Icont 0.175262f
+C4 VDD Vp0 0.01192f
+C5 VDD Vb 2.106096f
+C6 VDD Icont 0.264862f
+C7 Icont VSS 21.194016f
+C8 x6/x1/Vp VSS 15.046981f
+C9 Vb VSS 18.725176f
+C10 Vn3 VSS 0.195959f
+C11 x6/x4/vco_stage_half_1/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C12 VDD VSS 0.150946p
+C13 x6/x1/Vn VSS 15.59072f
+C14 x6/x4/vco_stage_half_1/Vs VSS 1.412919f
+C15 Vp3 VSS 0.195959f
+C16 x6/x4/vco_stage_half_0/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C17 x6/x4/Vn VSS 13.412039f
+C18 Vn2 VSS 0.195959f
+C19 x6/x3/vco_stage_half_1/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C20 x6/x4/Vp VSS 14.170017f
+C21 x6/x3/vco_stage_half_1/Vs VSS 1.412919f
+C22 Vp2 VSS 0.195959f
+C23 x6/x3/vco_stage_half_0/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C24 x6/x3/Vn VSS 15.06107f
+C25 Vn1 VSS 0.195959f
+C26 x6/x2/vco_stage_half_1/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C27 x6/x3/Vp VSS 15.067304f
+C28 x6/x2/vco_stage_half_1/Vs VSS 1.412919f
+C29 Vp1 VSS 0.195959f
+C30 x6/x2/vco_stage_half_0/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C31 x6/x2/Vn VSS 13.422138f
+C32 Vn0 VSS 0.195959f
+C33 x6/x1/vco_stage_half_1/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+C34 x6/x2/Vp VSS 14.163861f
+C35 x6/x1/vco_stage_half_1/Vs VSS 1.412919f
+C36 Vp0 VSS 0.195959f
+C37 x6/x1/vco_stage_half_0/vco_buffer_0/vco_inverter_1/Vin VSS 0.400178f
+.ends
+
+.subckt tt_um_georgboecherer_vco.pex clk ena rst_n ua[0] ua[1] ua[2] ua[3] ua[4] ua[5]
++ ua[6] ua[7] ui_in[0] ui_in[1] ui_in[2] ui_in[3] ui_in[4] ui_in[5] ui_in[6] ui_in[7]
++ uio_in[0] uio_in[1] uio_in[2] uio_in[3] uio_in[4] uio_in[5] uio_in[6] uio_in[7]
++ uo_out[0] uo_out[1] uo_out[2] uo_out[3] uo_out[4] uo_out[5] uo_out[6] uo_out[7]
++ VDPWR VGND
+Xvco_0 ua[0] uo_out[7] uo_out[4] uo_out[3] uo_out[0] uo_out[6] uo_out[5] uo_out[2]
++ uo_out[1] ua[1] vco_0/x6/x1/Vn vco_0/x6/x3/Vp vco_0/x6/x4/Vn vco_0/x6/x2/Vp vco_0/x6/x3/Vn
++ VDPWR VGND vco
+C0 ui_in[3] ui_in[2] 0.031023f
+C1 vco_0/x6/x3/vco_stage_half_0/vco_buffer_0/vco_inverter_1/Vin uo_out[3] 0.01263f
+C2 ui_in[6] ui_in[5] 0.031023f
+C3 uo_out[3] uo_out[4] 1.64938f
+C4 uio_in[3] uio_in[4] 0.031023f
+C5 uo_out[4] VDPWR 0.635519f
+C6 vco_0/x6/x3/Vn uo_out[4] 0.012167f
+C7 ua[0] ua[1] 2.245551f
+C8 uio_in[1] uio_in[0] 0.031023f
+C9 uo_out[3] VDPWR 1.419555f
+C10 ui_in[1] ui_in[2] 0.031023f
+C11 vco_0/x6/x3/Vn uo_out[3] 0.060682f
+C12 ui_in[7] uio_in[0] 0.031023f
+C13 ui_in[7] ui_in[6] 0.031023f
+C14 uo_out[4] uo_out[5] 1.888002f
+C15 uo_out[0] VDPWR 0.684716f
+C16 ui_in[5] ui_in[4] 0.031023f
+C17 uio_in[5] uio_in[6] 0.031023f
+C18 uo_out[0] uio_in[7] 0.031023f
+C19 ui_in[0] rst_n 0.031023f
+C20 ui_in[3] ui_in[4] 0.031023f
+C21 ui_in[0] ui_in[1] 0.031023f
+C22 VDPWR uo_out[5] 0.53807f
+C23 vco_0/x6/x4/Vp uo_out[2] 0.012179f
+C24 vco_0/x6/x1/Vp uo_out[0] 0.012167f
+C25 clk ena 0.031023f
+C26 uo_out[3] uo_out[2] 7.274392f
+C27 uo_out[6] vco_0/x6/x2/Vp 0.012167f
+C28 uo_out[1] VDPWR 0.763376f
+C29 uo_out[6] VDPWR 0.976741f
+C30 uo_out[2] VDPWR 0.687394f
+C31 uo_out[3] ua[1] 0.08925f
+C32 uo_out[1] uo_out[0] 7.442082f
+C33 uo_out[0] ua[1] 0.027044f
+C34 uo_out[6] uo_out[5] 1.69662f
+C35 vco_0/x6/x3/Vp uo_out[3] 0.058196f
+C36 vco_0/x6/x2/Vn uo_out[7] 0.012291f
+C37 VDPWR uo_out[7] 0.667552f
+C38 vco_0/x6/x4/Vn uo_out[3] 0.012167f
+C39 uio_in[7] uio_in[6] 0.031023f
+C40 uo_out[1] uo_out[2] 7.19996f
+C41 uio_in[3] uio_in[2] 0.031023f
+C42 uio_in[1] uio_in[2] 0.031023f
+C43 uio_in[5] uio_in[4] 0.031023f
+C44 clk rst_n 0.031023f
+C45 vco_0/x6/x3/Vp uo_out[5] 0.012167f
+C46 uo_out[1] vco_0/x6/x1/Vn 0.012167f
+C47 vco_0/x6/x1/vco_stage_half_1/vco_buffer_0/vco_inverter_1/Vin uo_out[6] 0.01291f
+C48 uo_out[6] uo_out[7] 2.669692f
+C49 ua[2] VGND 0.144147f
+C50 ua[3] VGND 0.144147f
+C51 ua[4] VGND 0.144147f
+C52 ua[5] VGND 0.144147f
+C53 ua[6] VGND 0.144856f
+C54 ua[7] VGND 0.146962f
+C55 ena VGND 0.070385f
+C56 clk VGND 0.042875f
+C57 rst_n VGND 0.042875f
+C58 ui_in[0] VGND 0.042875f
+C59 ui_in[1] VGND 0.042875f
+C60 ui_in[2] VGND 0.042875f
+C61 ui_in[3] VGND 0.042875f
+C62 ui_in[4] VGND 0.042875f
+C63 ui_in[5] VGND 0.042875f
+C64 ui_in[6] VGND 0.042875f
+C65 ui_in[7] VGND 0.042875f
+C66 uio_in[0] VGND 0.042875f
+C67 uio_in[1] VGND 0.042875f
+C68 uio_in[2] VGND 0.042875f
+C69 uio_in[3] VGND 0.042875f
+C70 uio_in[4] VGND 0.042875f
+C71 uio_in[5] VGND 0.042875f
+C72 uio_in[6] VGND 0.042875f
+C73 uio_in[7] VGND 0.042875f
+C74 ua[0] VGND 35.998512f
+C75 vco_0/x6/x1/Vp VGND 14.833932f
+C76 ua[1] VGND 32.05382f
+C77 uo_out[1] VGND 2.005582f
+C78 vco_0/x6/x4/vco_stage_half_1/vco_buffer_0/vco_inverter_1/Vin VGND 0.400178f
+C79 VDPWR VGND 0.171825p
+C80 vco_0/x6/x1/Vn VGND 15.37448f
+C81 vco_0/x6/x4/vco_stage_half_1/Vs VGND 1.412919f
+C82 uo_out[0] VGND 13.599174f
+C83 vco_0/x6/x4/vco_stage_half_0/vco_buffer_0/vco_inverter_1/Vin VGND 0.400178f
+C84 vco_0/x6/x4/Vn VGND 13.412039f
+C85 uo_out[2] VGND 3.051503f
+C86 vco_0/x6/x3/vco_stage_half_1/vco_buffer_0/vco_inverter_1/Vin VGND 0.400178f
+C87 vco_0/x6/x4/Vp VGND 14.170017f
+C88 vco_0/x6/x3/vco_stage_half_1/Vs VGND 1.412919f
+C89 uo_out[3] VGND 1.136452f
+C90 vco_0/x6/x3/vco_stage_half_0/vco_buffer_0/vco_inverter_1/Vin VGND 0.400178f
+C91 vco_0/x6/x3/Vn VGND 15.06107f
+C92 uo_out[5] VGND 1.962593f
+C93 vco_0/x6/x2/vco_stage_half_1/vco_buffer_0/vco_inverter_1/Vin VGND 0.400178f
+C94 vco_0/x6/x3/Vp VGND 15.067304f
+C95 vco_0/x6/x2/vco_stage_half_1/Vs VGND 1.412919f
+C96 uo_out[4] VGND 2.051722f
+C97 vco_0/x6/x2/vco_stage_half_0/vco_buffer_0/vco_inverter_1/Vin VGND 0.400178f
+C98 vco_0/x6/x2/Vn VGND 13.422138f
+C99 uo_out[6] VGND 1.782889f
+C100 vco_0/x6/x1/vco_stage_half_1/vco_buffer_0/vco_inverter_1/Vin VGND 0.400178f
+C101 vco_0/x6/x2/Vp VGND 14.163861f
+C102 vco_0/x6/x1/vco_stage_half_1/Vs VGND 1.412919f
+C103 uo_out[7] VGND 3.745793f
+C104 vco_0/x6/x1/vco_stage_half_0/vco_buffer_0/vco_inverter_1/Vin VGND 0.400178f
+.ends
+

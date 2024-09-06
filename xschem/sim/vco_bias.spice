@@ -1,0 +1,8 @@
+** sch_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco_bias.sch
+.subckt vco_bias VDD VSS Icont Vb
+*.PININFO VDD:B VSS:B Icont:I Vb:O
+XM1 Icont Icont VSS VSS sky130_fd_pr__nfet_01v8 L=2 W=4 nf=2 m=1
+XM2 Vb Icont VSS VSS sky130_fd_pr__nfet_01v8 L=2 W=4 nf=2 m=1
+XM3 Vb Vb VDD VDD sky130_fd_pr__pfet_01v8 L=0.25 W=4 nf=1 m=1
+.ends
+.end

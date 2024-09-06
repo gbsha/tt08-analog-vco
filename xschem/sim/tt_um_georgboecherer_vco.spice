@@ -1,0 +1,87 @@
+** sch_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/tt_um_georgboecherer_vco.sch
+.subckt tt_um_georgboecherer_vco clk ena rst_n ua[0] ua[1] ua[2] ua[3] ua[4] ua[5] ua[6] ua[7] ui_in[0] ui_in[1] ui_in[2] ui_in[3]
++ ui_in[4] ui_in[5] ui_in[6] ui_in[7] uio_in[0] uio_in[1] uio_in[2] uio_in[3] uio_in[4] uio_in[5] uio_in[6] uio_in[7] uo_out[0] uo_out[1]
++ uo_out[2] uo_out[3] uo_out[4] uo_out[5] uo_out[6] uo_out[7] VDPWR VGND
+*.PININFO clk:I ena:I rst_n:I ua[0]:I ua[1]:I ua[2]:I ua[3]:I ua[4]:I ua[5]:I ua[6]:I ua[7]:I ui_in[0]:I ui_in[1]:I ui_in[2]:I
+*+ ui_in[3]:I ui_in[4]:I ui_in[5]:I ui_in[6]:I ui_in[7]:I uio_in[0]:I uio_in[1]:I uio_in[2]:I uio_in[3]:I uio_in[4]:I uio_in[5]:I uio_in[6]:I
+*+ uio_in[7]:I uo_out[0]:I uo_out[1]:I uo_out[2]:I uo_out[3]:I uo_out[4]:I uo_out[5]:I uo_out[6]:I uo_out[7]:I VDPWR:B VGND:B
+x1 VDPWR VGND ua[0] uo_out[7] uo_out[4] uo_out[3] uo_out[0] uo_out[6] uo_out[5] uo_out[2] uo_out[1] ua[1] vco
+.ends
+
+* expanding   symbol:  vco.sym # of pins=12
+** sym_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco.sym
+** sch_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco.sch
+.subckt vco VDD VSS Icont Vp0 Vp1 Vp2 Vp3 Vn0 Vn1 Vn2 Vn3 Vb
+*.PININFO VDD:B VSS:B Icont:I Vp0:O Vp1:O Vp2:O Vp3:O Vn0:O Vn1:O Vn2:O Vn3:O Vb:O
+x1 VDD VSS Icont Vb vco_bias
+x6 VDD VSS Vb Icont Vp0 Vp1 Vp2 Vp3 Vn0 Vn1 Vn2 Vn3 vco_core
+.ends
+
+
+* expanding   symbol:  vco_bias.sym # of pins=4
+** sym_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco_bias.sym
+** sch_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco_bias.sch
+.subckt vco_bias VDD VSS Icont Vb
+*.PININFO VDD:B VSS:B Icont:I Vb:O
+XM1 Icont Icont VSS VSS sky130_fd_pr__nfet_01v8 L=2 W=4 nf=2 m=1
+XM2 Vb Icont VSS VSS sky130_fd_pr__nfet_01v8 L=2 W=4 nf=2 m=1
+XM3 Vb Vb VDD VDD sky130_fd_pr__pfet_01v8 L=0.25 W=4 nf=1 m=1
+.ends
+
+
+* expanding   symbol:  vco_core.sym # of pins=12
+** sym_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco_core.sym
+** sch_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco_core.sch
+.subckt vco_core VDD VSS Vb Vc Vp0 Vp1 Vp2 Vp3 Vn0 Vn1 Vn2 Vn3
+*.PININFO VDD:B VSS:B Vb:I Vc:I Vp0:O Vp1:O Vp2:O Vp3:O Vn0:O Vn1:O Vn2:O Vn3:O
+x1 VDD VSS Vp Vn Vb Vc net1 net2 Vp0 Vn0 vco_stage
+x2 VDD VSS net1 net2 Vb Vc net3 net4 Vp1 Vn1 vco_stage
+x3 VDD VSS net3 net4 Vb Vc net5 net6 Vp2 Vn2 vco_stage
+x4 VDD VSS net5 net6 Vb Vc Vn Vp Vp3 Vn3 vco_stage
+.ends
+
+
+* expanding   symbol:  vco_stage.sym # of pins=10
+** sym_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco_stage.sym
+** sch_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco_stage.sch
+.subckt vco_stage VDD VSS Vp Vn Vb Vc Vpout Vnout Vpbuf Vnbuf
+*.PININFO VDD:B VSS:B Vp:I Vn:I Vb:I Vc:I Vpout:O Vnout:O Vpbuf:O Vnbuf:O
+x1 VDD VSS Vp Vb Vnout Vpout Vds_m5 Vpbuf vco_stage_half
+x2 VDD VSS Vn Vb Vpout Vnout Vds_m5 Vnbuf vco_stage_half
+XM5 Vds_m5 Vc VSS VSS sky130_fd_pr__nfet_01v8 L=2 W=4 nf=2 m=1
+.ends
+
+
+* expanding   symbol:  vco_stage_half.sym # of pins=8
+** sym_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco_stage_half.sym
+** sch_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco_stage_half.sch
+.subckt vco_stage_half VDD VSS Vin Vb Vd Vout Vs Vbuf
+*.PININFO VDD:B VSS:B Vin:I Vb:I Vd:I Vout:O Vs:O Vbuf:O
+XM7 Vout Vd VDD VDD sky130_fd_pr__pfet_01v8 L=2 W=4 nf=2 m=1
+XM3 Vout Vb VDD VDD sky130_fd_pr__pfet_01v8 L=2 W=4 nf=2 m=1
+XM1 Vout Vin Vs VSS sky130_fd_pr__nfet_01v8 L=2 W=4 nf=2 m=1
+x1 VDD VSS Vout Vbuf vco_buffer
+XM8 VSS Vout VSS VSS sky130_fd_pr__nfet_01v8 L=11 W=11 nf=1 m=1
+.ends
+
+
+* expanding   symbol:  vco_buffer.sym # of pins=4
+** sym_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco_buffer.sym
+** sch_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco_buffer.sch
+.subckt vco_buffer VDD VSS Vin Vout
+*.PININFO VDD:B VSS:B Vin:I Vout:O
+x1 VDD Vin net1 VSS vco_inverter
+x2 VDD net1 Vout VSS vco_inverter
+.ends
+
+
+* expanding   symbol:  vco_inverter.sym # of pins=4
+** sym_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco_inverter.sym
+** sch_path: /foss/designs/git/gbsha/tt08-analog-vco/xschem/vco_inverter.sch
+.subckt vco_inverter VDD Vin Vout VSS
+*.PININFO VDD:B VSS:B Vin:I Vout:O
+XM1 Vout Vin VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM2 Vout Vin VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+.ends
+
+.end
