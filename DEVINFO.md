@@ -2,62 +2,37 @@
 
 ## Development Environment
 
-The docker image `iic-osic-tools` version `2024.07` is used, with a few modifications.
-
-### xschem
-
-`xschem` is compiled and installed to `/foss/designs/local/bin/xschem`, for enabling the newly added option `top_is_subckt`.
-
-### CACE Version
-
-```
-export PATH=/headless/.local/bin:$PATH
-export PYTHONPATH=/headless/.local/lib/python3.10/site-packages:$PYTHONPATH
-pip3 install --upgrade cace==2.4.0
-```
-### CACE patch
- In 
-```
-/headless/.local/lib/python3.10/site-packages/cace/common/cace_regenerate.py
-```
-Modify `xschemargs` in the function `regenerate_schematic_netlist` to
-```
-xschemargs = [
-            '/foss/designs/local/bin/xschem', # xschem
-            '-n',
-            '-s',
-            '-r',
-            '-x',
-            '-q',
-            '--tcl',
-            'set top_is_subckt 1', # 'set lvs_netlist 1',
-        ]
-```
-The original values are commented out.
+The docker image `iic-osic-tools` version `2024.07` is used.
 
 ## Verification
 
 ### LVS
 
-#### Layout
+In `./mag`, run `./run-lvs.sh`.
 
+### DRC
+
+In `./mag`, run `./run-drc.sh`.
+
+### PEX
+
+TODO: Currently done manually. In ./mag:
+```
+magic tt_um_georgboecherer_vco.mag
+```
 In magic:
 ```
-extract no capacitance
+extract do resistance
+extract do capacitance
+extract do coupling
 extract all
+ext2spice subcircuit on
+ext2spice hierarchy on
 ext2spice lvs
+ext2spice cthresh 0.01
+ext2spice rthresh 100    
 ext2spice
 ```
-
-#### Schematic
-```
-xschem -n -s -x -q tt_um_georgboecherer_vco.sch -N tt_um_georgboecherer_vco.spice -o ./ --tcl 'set top_is_subckt 1'
-```
-
-#### Netgen
-
-Start `netgen`, then:
-```
-lvs tt_um_georgboecherer_vco.spice ../xschem/tt_um_georgboecherer_vco.spice ""
-```
-Without the `""`, netgen errs with `Error:  Setup file setup.tcl does not exist.`
+* Copy `./mag/tt_um_georgboecherer_vco.spice` to `./xschem/tt_um_georgboecherer_vco.pex.spice`.
+* In `./xschem/tt_um_georgboecherer_vco.pex.spice`, change topcell name from `tt_um_georg.boecherer_vco` to `tt_um_georgboecherer_vco.pex`
+* Test with `xschem tt_tb.sch`.
