@@ -32,5 +32,13 @@ C {devices/ipin.sym} -170 -40 1 0 {name=p25 lab=uio_in[4]}
 C {devices/ipin.sym} -200 -40 1 0 {name=p24 lab=uio_in[5]}
 C {devices/ipin.sym} -230 -40 1 0 {name=p23 lab=uio_in[6]}
 C {devices/ipin.sym} -260 -40 1 0 {name=p1 lab=uio_in[7]}
+C {devices/ipin.sym} 40 20 3 0 {name=p30 lab=uo_out[0]}
+C {devices/ipin.sym} 70 20 3 0 {name=p31 lab=uo_out[1]}
+C {devices/ipin.sym} 100 20 3 0 {name=p32 lab=uo_out[2]}
+C {devices/ipin.sym} 130 20 3 0 {name=p33 lab=uo_out[3]}
+C {devices/ipin.sym} 160 20 3 0 {name=p34 lab=uo_out[4]}
+C {devices/ipin.sym} 190 20 3 0 {name=p35 lab=uo_out[5]}
+C {devices/ipin.sym} 220 20 3 0 {name=p36 lab=uo_out[6]}
+C {devices/ipin.sym} 250 20 3 0 {name=p37 lab=uo_out[7]}
 C {devices/iopin.sym} -310 -20 2 0 {name=p4 lab=VDPWR}
 C {devices/iopin.sym} -310 20 2 0 {name=p5 lab=VGND}
