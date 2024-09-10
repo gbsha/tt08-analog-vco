@@ -133,7 +133,6 @@ C {devices/code_shown.sym} -300 -700 0 0 {name=NGSPICE
 only_toplevel=false 
 value="
 .param vdd=1.8
-.param cl=2p
 
 *.param vb=0.97286
 *.param vc=1.0975
@@ -148,9 +147,6 @@ value="
 .control
 
     save all
-    save @m.x1.xm3.msky130_fd_pr__pfet_01v8[id] @m.x1.xm3.msky130_fd_pr__pfet_01v8[gm] @m.x1.xm3.msky130_fd_pr__pfet_01v8[gds]
-    save @m.x1.xm1.msky130_fd_pr__nfet_01v8[id] @m.x1.xm1.msky130_fd_pr__nfet_01v8[gm] @m.x1.xm1.msky130_fd_pr__nfet_01v8[gds]
-    save @m.x1.xm5.msky130_fd_pr__nfet_01v8[id] @m.x1.xm5.msky130_fd_pr__nfet_01v8[gm] @m.x1.xm5.msky130_fd_pr__nfet_01v8[gds]
 
     * operating point
     op
@@ -165,7 +161,7 @@ value="
     meas ac OF when vout_phase_margin=120
 
     write vco_stage_tb_ac.raw
-    quit
+    * quit
 .endc
 "}
 C {devices/launcher.sym} -210 -1000 0 0 {name=h1

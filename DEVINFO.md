@@ -1,26 +1,42 @@
-# 
+# Development Informations
 
-## Development Environment
+## Environment
 
-The docker image `iic-osic-tools` version `2024.07` is used.
+The docker image [iic-osic-tools](https://github.com/iic-jku/IIC-OSIC-TOOLS) version `2024.07` was used on a local computer.
+
+## Schematics
+
+Schematics were drawn using `xschem` and are placed in [`./xschem`](./xschem/). Files with suffix `_tb.sch` contain testbenches that can be run from the `xschem` GUI.
+
+## Layout
+
+Layout was done using `magic`. Cells were drawn in hierarchical order by the following steps:
+1. Ensure all existing `OLDCELLNAME.mag` files in [`./mag`](./mag) are under version control and comitted.
+2. From `xschem`: generate netlist of `CELLNAME.sch` schematic to be layouted, setting the LVS netlist flag. This generates `CELLNAME.spice` in [`./xschem/sim`](./xschem/sim/).
+3. `cd ./mag/`, then start `magic`. From the menu, import spice netlist.
+4. Close magic. By `git checkout -- OLDCELLNAME.mag` undo all changes that magic has done to existing `OLDCELLNAME.mag` cells.
+5. Add newly created `.mag` files to version control and commit.
+6. Open `CELLNAME.mag`. The cell should now contain all ports, previously layouted cells, and newly added transistors.
+7. Place and wire up as in the tutorial [Analog layout of an op-amp using the Magic VLSI tool](https://youtu.be/XvBpqKwzrFY?si=_2WCLe-FPyDEbQDl).
+8. Add the newly layouted cell to [`./mag/run-lvs.sh`](./mag/run-lvs.sh) and [`./mag/run-drc.sh`](./mag/run-drc.sh).
 
 ## Verification
 
 ### LVS
 
-In `./mag`, run `./run-lvs.sh`.
+In [`./mag`](./mag/), run [`./run-lvs.sh`](./mag/run-lvs.sh). Uses `iic-lvs.sh` from `iic-osic-tools`.
 
 ### DRC
 
-In `./mag`, run `./run-drc.sh`.
+In [`./mag`](./mag/), run [`./run-drc.sh`](./mag/run-drc.sh). Uses `iic-drc.sh` from `iic-osic-tools`.
 
 ### PEX
 
-TODO: Currently done manually. In ./mag:
+TODO: Currently done manually. In [`./mag`](./mag):
 ```
 magic tt_um_georgboecherer_vco.mag
 ```
-In magic:
+In the magic tcl window:
 ```
 extract do resistance
 extract do capacitance
@@ -36,3 +52,10 @@ ext2spice
 * Copy `./mag/tt_um_georgboecherer_vco.spice` to `./xschem/tt_um_georgboecherer_vco.pex.spice`.
 * In `./xschem/tt_um_georgboecherer_vco.pex.spice`, change topcell name from `tt_um_georg.boecherer_vco` to `tt_um_georgboecherer_vco.pex`
 * Test with `xschem tt_tb.sch`.
+
+### TODOs
+
+* Use `iic-pex.sh` from `iic-osic-tools`.
+* In [tt_um_georgboecherer_vco.pex.sym](./xschem/tt_um_georgboecherer_vco.pex.sym), replace absolute path `spice_sym_def=".include /foss/designs/git/gbsha/tt08-analog-vco/xschem/tt_um_georgboecherer_vco.pex.spice"
+` with relative path.
+* Use [CACE](https://github.com/efabless/cace) for circuit characterization.

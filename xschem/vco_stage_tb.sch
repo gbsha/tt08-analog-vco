@@ -6,7 +6,7 @@ V {}
 S {}
 E {}
 B 2 -1250 -970 -450 -570 {flags=graph
-y1=-1.3
+y1=-1.8
 y2=1.8
 ypos1=0
 ypos2=2
@@ -90,12 +90,10 @@ N 270 -930 270 -890 {
 lab=Vout}
 N -380 -1150 -260 -1150 {
 lab=Vb}
-N -380 -1110 -260 -1110 {
-lab=Vc}
 N -720 -1150 -720 -1130 {
-lab=#net3}
+lab=Vc}
 N -720 -1130 -680 -1130 {
-lab=#net3}
+lab=Vc}
 N -720 -1250 -720 -1210 {
 lab=VDD}
 C {devices/launcher.sym} -210 -870 0 0 {name=h5
@@ -107,7 +105,7 @@ C {devices/lab_wire.sym} -110 -1260 0 0 {name=p6 sig_type=std_logic lab=VDD}
 C {devices/lab_pin.sym} -260 -1150 3 1 {name=p7 sig_type=std_logic lab=Vb}
 C {devices/lab_pin.sym} -260 -1230 2 1 {name=p8 sig_type=std_logic lab=Vp}
 C {devices/lab_pin.sym} -260 -1190 2 1 {name=p9 sig_type=std_logic lab=Vn}
-C {devices/lab_pin.sym} -260 -1110 3 1 {name=p10 sig_type=std_logic lab=Vc}
+C {devices/lab_pin.sym} -260 -1110 2 1 {name=p10 sig_type=std_logic lab=Vc}
 C {devices/code_shown.sym} -270 -610 0 0 {name=NGSPICE 
 only_toplevel=false 
 value="
@@ -121,11 +119,7 @@ value="
 .control
 
     save all
-    save @m.x1.xm3.msky130_fd_pr__pfet_01v8[id] @m.x1.xm3.msky130_fd_pr__pfet_01v8[gm] @m.x1.xm3.msky130_fd_pr__pfet_01v8[gds]
-    save @m.x1.xm1.msky130_fd_pr__nfet_01v8[id] @m.x1.xm1.msky130_fd_pr__nfet_01v8[gm] @m.x1.xm1.msky130_fd_pr__nfet_01v8[gds]
-    save @m.x1.xm5.msky130_fd_pr__nfet_01v8[id] @m.x1.xm5.msky130_fd_pr__nfet_01v8[gm] @m.x1.xm5.msky130_fd_pr__nfet_01v8[gds]
-    save @m.x1.xm7.msky130_fd_pr__pfet_01v8[id] @m.x1.xm7.msky130_fd_pr__pfet_01v8[gm] @m.x1.xm7.msky130_fd_pr__pfet_01v8[gds]
-
+ 
     * operating point
     op
 
@@ -136,7 +130,6 @@ value="
     dc vdm -1.8 1.8 0.1
 
     write vco_stage_tb.raw
-    quit
 .endc
 "}
 C {devices/launcher.sym} -210 -1000 0 0 {name=h1
@@ -180,3 +173,4 @@ value="
 
 .temp 27
 "}
+C {devices/lab_pin.sym} -720 -1130 2 1 {name=p12 sig_type=std_logic lab=Vc}

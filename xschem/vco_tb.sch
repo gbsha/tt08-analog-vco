@@ -93,15 +93,10 @@ C {devices/lab_wire.sym} 250 -800 0 0 {name=p5 sig_type=std_logic lab=VDD}
 C {devices/code_shown.sym} 10 -490 0 0 {name=NGSPICE 
 only_toplevel=false 
 value="
-.param cl=1p
-.param icont=0.025m
-.param WLcap=11
-.param WLp=8
-.param W=4
-.param L=2
-.param Lb=0.25
 
+.param icont=0.025m
 *.ic v(Vp)=1.8 v(Vn)=0.
+
 .option klu
 .control
 	save all
