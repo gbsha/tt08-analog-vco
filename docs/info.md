@@ -19,7 +19,7 @@ The 4 differential stages provide in total 8 tap signals with phase differences 
 
 ## How to test
 
-Connect a control voltage or curent to the analog input pin(s) and observe the oscillating signals at the digital output pins.
+Connect a control voltage or current to the analog input pin `ua[0]` and observe the oscillating signals at the digital output pins.
 
 ## External hardware
 
