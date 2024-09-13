@@ -4,6 +4,44 @@
 
 The docker image [iic-osic-tools](https://github.com/iic-jku/IIC-OSIC-TOOLS) version `2024.07` was used on a local computer.
 
+### CACE
+
+1. Install CACE version `2.4.14` by calling `update-cace 2.4.14` where `update-cace` is the following script:
+    ```bash
+    #!/bin/bash
+
+    export PATH=/headless/.local/bin:$PATH
+    export PYTHONPATH=/headless/.local/lib/python3.10/site-packages:$PYTHONPATH
+
+    if [ -z "$1" ]; then
+            pip3 install --upgrade cace
+    else
+            pip3 install --upgrade "cace==$1"
+    fi
+    ```
+2. Update `xschem` to commit `652268c4` and install it to `/foss/designs/local/bin/xschem` 
+
+    *TODO: Howto install xschem*
+
+3. Patch CACE by changing the path from `xschem` to `/foss/designs/local/bin/xschem` in 
+    ```
+    /headless/.local/lib/python3.10/site-packages/cace/common/cace_regenerate.py
+    ```
+    The relevant section is this:
+    ```python
+    xschemargs = [
+                '/foss/designs/local/bin/xschem', # xschem
+                '-n',
+                '-s',
+                '-r',
+                '-x',
+                '-q',
+                '--tcl',
+                'set top_is_subckt 1',
+            ]
+    ```
+
+
 ## Schematics
 
 Schematics were drawn using `xschem` and are placed in [`./xschem`](./xschem/). Files with suffix `_tb.sch` contain testbenches that can be run from the `xschem` GUI.

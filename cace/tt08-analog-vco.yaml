@@ -1,0 +1,213 @@
+#--------------------------------------------------------------
+# CACE circuit characterization file
+#--------------------------------------------------------------
+
+name:           vco
+description:    An analog voltage controlled oscillator
+PDK:            sky130A
+
+cace_format:    5.2
+
+authorship:
+  designer:         Georg Boecherer
+  company:          Efabless
+  creation_date:    August 2024
+  license:          Apache 2.0
+
+paths:
+  root:             ..
+  schematic:        xschem
+  layout:           gds
+  netlist:          netlist
+  documentation:    docs
+
+# VDD VSS Icont Vp0 Vp1 Vp2 Vp3 Vn0 Vn1 Vn2 Vn3 Vb
+pins:
+  VDD:
+    description: Positive analog power supply
+    type: power
+    direction: inout
+    Vmin: 1.7
+    Vmax: 1.9
+  VSS:
+    description: Analog ground
+    type: ground
+    direction: inout
+  Icont:
+    description: Bias current input
+    type: signal
+    direction: input
+  Vp0:
+    description: Stage 0 positive voltage digital output output
+    type: signal
+    direction: output
+  Vp1:
+    description: Stage 1 positive voltage digital output output
+    type: signal
+    direction: output
+  Vp2:
+    description: Stage 2 positive voltage digital output output
+    type: signal
+    direction: output
+  Vp3:
+    description: Stage 3 positive voltage digital output output
+    type: signal
+    direction: output
+  Vn0:
+    description: Stage 0 negative voltage digital output output
+    type: signal
+    direction: output
+  Vn1:
+    description: Stage 1 negative voltage digital output output
+    type: signal
+    direction: output
+  Vn2:
+    description: Stage 2 negative voltage digital output output
+    type: signal
+    direction: output
+  Vn3:
+    description: Stage 3 negative voltage digital output output
+    type: signal
+    direction: output
+  Vb:
+    description: pmos bias voltage
+    type: signal
+    direction: output
+
+default_conditions:
+  vdd:
+    description: Analog power supply voltage
+    display: Vdd
+    unit: V
+    typical: 1.8
+  icont:
+    description: Bias current
+    display: Icont
+    unit: mA
+    typical: 0.1
+  corner:
+    description: Process corner
+    display: Corner
+    typical: tt
+  temperature:
+    description: Ambient temperature
+    display: Temp
+    unit: °C
+    typical: 27
+
+parameters:
+  frequency:
+    description: Large signal transient response
+    display: Large signal transient response
+    status: skip
+    unit: mV
+    tool:
+      ngspice:
+        template: vco_tb.sch
+        format: ascii
+        suffix: .data
+        variables: [Icont, frequency, Vc, Vb]
+    plot:
+      frequency:
+        suffix: .svg
+        xaxis: Icont
+        yaxis: frequency
+    variables:
+      Icont:
+        display: Icont
+        unit: A
+      frequency:
+        display: Frequency
+        unit: MHz
+      Vc:
+        display: Vc
+        unit: V
+      Vb:
+        display: Vb
+        unit: V
+    conditions:
+      icont:
+        display: Bias current
+        unit: mA
+        enumerate: [0.025, 0.1, 0.25]
+      temperature:
+        enumerate: [27]
+      corner:
+        enumerate: [tt, ss, sf, fs, ff]
+
+
+  
+  # should fit in 160x225um with some margin
+  magic_area:
+    spec:
+      area:
+        display: Area
+        description: Total circuit layout area
+        unit: µm²
+        maximum:
+          value: 20000
+      width:
+        display: Width
+        description: Total circuit layout width
+        unit: µm
+        maximum:
+          value: 110
+      height:
+        display: Height
+        description: Total circuit layout height
+        unit: µm
+        maximum:
+          value: 175
+    tool:
+      magic_area
+
+  netgen_lvs:
+    description: Netgen LVS
+    display: Netgen LVS
+    spec:
+      lvs_errors:
+        maximum:
+          value: 0
+    tool: netgen_lvs
+
+  magic_drc:
+    description: Magic DRC
+    display: Magic DRC
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool: magic_drc
+
+  klayout_drc_feol:
+    description: KLayout DRC feol
+    display: KLayout DRC feol
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool:
+        klayout_drc:
+            args: ['-rd', 'feol=true']
+
+  klayout_drc_beol:
+    description: KLayout DRC beol
+    display: KLayout DRC beol
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool:
+        klayout_drc:
+            args: ['-rd', 'beol=true']
+
+  klayout_drc_full:
+    description: KLayout DRC full
+    display: KLayout DRC full
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool:
+        klayout_drc:
+            args: ['-rd', 'feol=true', '-rd', 'beol=true', '-rd', 'offgrid=true']
