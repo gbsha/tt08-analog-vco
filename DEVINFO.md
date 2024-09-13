@@ -40,7 +40,15 @@ The docker image [iic-osic-tools](https://github.com/iic-jku/IIC-OSIC-TOOLS) ver
                 'set top_is_subckt 1',
             ]
     ```
+### Questions
 
+1. Issue editing template testbench:
+    ```
+    cd cace/templates
+    xschem vco_tb.sch
+    ```
+    opens `xschem/vco_tb.sch`, not `cace/templates/vco_tb.sch`, because of `cace/templates/xschemrc`.
+2. Plotting: when using condition as xaxis, no lines are drawn. Can this be changed?
 
 ## Schematics
 

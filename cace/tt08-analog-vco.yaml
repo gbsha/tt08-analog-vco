@@ -112,6 +112,11 @@ parameters:
         suffix: .svg
         xaxis: Icont
         yaxis: frequency
+    plot:
+      bias:
+        suffix: .svg
+        xaxis: Icont
+        yaxis: [Vc, Vb]
     variables:
       Icont:
         display: Icont
@@ -133,7 +138,7 @@ parameters:
       temperature:
         enumerate: [27]
       corner:
-        enumerate: [tt, ss, sf, fs, ff]
+        enumerate: [tt]
 
 
   
