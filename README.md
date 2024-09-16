@@ -3,10 +3,16 @@
 # Analog Voltage Controlled Oscillator
 
 * [Summary](./docs/info.md)
-* [Developer information](./DEVINFO.md)
+* [Designer information](./DEVINFO.md)
 * [TODO: Complete PVT Characterization]
 
-## Schematic Characterization
+## CACE Characterization
+
+* [Summary](docs/vco.md)
+* [Schematic](docs/vco_schematic.md)
+* [Layout](docs/vco_layout.md)
+
+## Manual Schematic Characterization
 
 ### Corners
 

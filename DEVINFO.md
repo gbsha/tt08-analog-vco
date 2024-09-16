@@ -1,4 +1,4 @@
-# Development Informations
+# Designer Information
 
 ## Environment
 
@@ -40,7 +40,9 @@ The docker image [iic-osic-tools](https://github.com/iic-jku/IIC-OSIC-TOOLS) ver
                 'set top_is_subckt 1',
             ]
     ```
-### Questions
+## Questions Regarding CACE
+
+0. CACE is called by [run-cace.sh](./run-cace.sh).
 
 1. Issue editing template testbench:
     ```
@@ -49,12 +51,21 @@ The docker image [iic-osic-tools](https://github.com/iic-jku/IIC-OSIC-TOOLS) ver
     ```
     opens `xschem/vco_tb.sch`, not `cace/templates/vco_tb.sch`, because of `cace/templates/xschemrc`.
 2. Plotting: when using condition as xaxis, no lines are drawn. Can this be changed?
+3. Even with `-j 1`, according to `htop`, more than `1` thread is started. Without setting `-j` to a small value, this slows the simulation down, when several configurations are evaluated, as the processes compete for the cores. Is there a way to implement strict cpu affinity? E.g., using `taskset`?
 
-## Schematics
+## Manual Design and Verification
+
+### TODOs
+
+* Use `iic-pex.sh` from `iic-osic-tools`.
+* In [tt_um_georgboecherer_vco.pex.sym](./xschem/tt_um_georgboecherer_vco.pex.sym), replace absolute path `spice_sym_def=".include /foss/designs/git/gbsha/tt08-analog-vco/xschem/tt_um_georgboecherer_vco.pex.spice"
+` with relative path.
+
+### Schematics
 
 Schematics were drawn using `xschem` and are placed in [`./xschem`](./xschem/). Files with suffix `_tb.sch` contain testbenches that can be run from the `xschem` GUI.
 
-## Layout
+### Layout
 
 Layout was done using `magic`. Cells were drawn in hierarchical order by the following steps:
 1. Ensure all existing `OLDCELLNAME.mag` files in [`./mag`](./mag) are under version control and comitted.
@@ -66,17 +77,17 @@ Layout was done using `magic`. Cells were drawn in hierarchical order by the fol
 7. Place and wire up as in the tutorial [Analog layout of an op-amp using the Magic VLSI tool](https://youtu.be/XvBpqKwzrFY?si=_2WCLe-FPyDEbQDl).
 8. Add the newly layouted cell to [`./mag/run-lvs.sh`](./mag/run-lvs.sh) and [`./mag/run-drc.sh`](./mag/run-drc.sh).
 
-## Verification
+### Verification
 
-### LVS
+#### LVS
 
 In [`./mag`](./mag/), run [`./run-lvs.sh`](./mag/run-lvs.sh). Uses `iic-lvs.sh` from `iic-osic-tools`.
 
-### DRC
+#### DRC
 
 In [`./mag`](./mag/), run [`./run-drc.sh`](./mag/run-drc.sh). Uses `iic-drc.sh` from `iic-osic-tools`.
 
-### PEX
+#### PEX
 
 TODO: Currently done manually. In [`./mag`](./mag):
 ```
@@ -99,9 +110,3 @@ ext2spice
 * In `./xschem/tt_um_georgboecherer_vco.pex.spice`, change topcell name from `tt_um_georg.boecherer_vco` to `tt_um_georgboecherer_vco.pex`
 * Test with `xschem tt_tb.sch`.
 
-### TODOs
-
-* Use `iic-pex.sh` from `iic-osic-tools`.
-* In [tt_um_georgboecherer_vco.pex.sym](./xschem/tt_um_georgboecherer_vco.pex.sym), replace absolute path `spice_sym_def=".include /foss/designs/git/gbsha/tt08-analog-vco/xschem/tt_um_georgboecherer_vco.pex.spice"
-` with relative path.
-* Use [CACE](https://github.com/efabless/cace) for circuit characterization.
