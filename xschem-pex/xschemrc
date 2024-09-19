@@ -7,4 +7,4 @@ if {![info exists PDK]} {
 append XSCHEM_LIBRARY_PATH :[file dirname [info script]]
 
 # Set the netlist directory
-set netlist_dir [file dirname [info script]]/sim_tmp
+set netlist_dir [file dirname [info script]]

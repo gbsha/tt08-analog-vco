@@ -4,58 +4,23 @@
 
 * [Summary](./docs/info.md)
 * [Designer information](./DEVINFO.md)
-* [TODO: Complete PVT Characterization]
 
 ## CACE Characterization
+
+See [Designer information: CACE](./DEVINFO.md#cace) for further information.
 
 * [Summary](docs/vco.md)
 * [Schematic](docs/vco_schematic.md)
 * [Layout](docs/vco_layout.md)
 
-## Manual Schematic Characterization
+## Custom Characterization
 
-### Corners
+See [Designer information: Custom Verification](./DEVINFO.md#custom-verification) for further information.
 
-![](./xschem/sim/vco_corner.svg)
+* [vco_characterization.csv](./xschem-pex/vco_characterization.csv) contains all simulation results in csv format. The results are also plotted below.
 
-### Temperature
+![](./xschem-pex/vco_characterization.svg)
 
-![](./xschem/sim/vco_temperature.svg)
+## Tiny Tapeout
 
-# Reference
-
-This project is a clone of the *Tiny Tapeout Analog Project Template*. The original README.md is included below. 
-
-## Tiny Tapeout Analog Project Template
-
-- [Read the documentation for project](docs/info.md)
-
-### What is Tiny Tapeout?
-
-Tiny Tapeout is an educational project that aims to make it easier and cheaper than ever to get your digital designs manufactured on a real chip.
-
-To learn more and get started, visit https://tinytapeout.com.
-
-### Analog projects
-
-For specifications and instructions, see the [analog specs page](https://tinytapeout.com/specs/analog/).
-
-### Enable GitHub actions to build the results page
-
-- [Enabling GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part)
-
-### Resources
-
-- [FAQ](https://tinytapeout.com/faq/)
-- [Digital design lessons](https://tinytapeout.com/digital_design/)
-- [Learn how semiconductors work](https://tinytapeout.com/siliwiz/)
-- [Join the community](https://tinytapeout.com/discord)
-
-### What next?
-
-- [Submit your design to the next shuttle](https://app.tinytapeout.com/).
-- Edit [this README](README.md) and explain your design, how it works, and how to test it.
-- Share your project on your social network of choice:
-  - LinkedIn [#tinytapeout](https://www.linkedin.com/search/results/content/?keywords=%23tinytapeout) [@TinyTapeout](https://www.linkedin.com/company/100708654/)
-  - Mastodon [#tinytapeout](https://chaos.social/tags/tinytapeout) [@matthewvenn](https://chaos.social/@matthewvenn)
-  - X (formerly Twitter) [#tinytapeout](https://twitter.com/hashtag/tinytapeout) [@matthewvenn](https://twitter.com/matthewvenn)
+This is a [Tiny Tapeout](https://tinytapeout.com) project based on a clone of the [Tiny Tapeout Analog Project Template](https://github.com/TinyTapeout/tt08-analog-template) and is submitted for manufacturing to [Tiny Tapeout 08](https://tinytapeout.com/runs/tt08/).

@@ -1,10 +1,119 @@
 # Designer Information
 
+* [Environment](#environment)
+* [Design](#design)
+* [Custom Verification](#custom-verification)
+* [CACE](#cace)
+
 ## Environment
 
-The docker image [iic-osic-tools](https://github.com/iic-jku/IIC-OSIC-TOOLS) version `2024.07` was used on a local computer.
+The docker image [iic-osic-tools](https://github.com/iic-jku/IIC-OSIC-TOOLS) version `2024.07` is used on a personal computer.
 
-### CACE
+## Design
+
+### Schematics
+
+Schematics were drawn using `xschem` and are placed in [`./xschem`](./xschem/). Files with suffix `_tb.sch` contain testbenches that can be run from the `xschem` GUI.
+
+### Layout
+
+Layout was done using `magic`. Cells were drawn in hierarchical order by the following steps:
+1. Ensure all existing `OLDCELLNAME.mag` files in [`./mag`](./mag) are under version control and comitted.
+2. From `xschem`: generate netlist of `CELLNAME.sch` schematic to be layouted, setting the LVS netlist flag. This generates `CELLNAME.spice` in [`./xschem/sim`](./xschem/sim/).
+3. `cd ./mag/`, then start `magic`. From the menu, import spice netlist.
+4. Close magic. By `git checkout -- OLDCELLNAME.mag` undo all changes that magic has done to existing `OLDCELLNAME.mag` cells.
+5. Add newly created `.mag` files to version control and commit.
+6. Open `CELLNAME.mag`. The cell should now contain all ports, previously layouted cells, and newly added transistors.
+7. Place and wire up as in the tutorial [Analog layout of an op-amp using the Magic VLSI tool](https://youtu.be/XvBpqKwzrFY?si=_2WCLe-FPyDEbQDl).
+8. Add the newly layouted cell to [`./mag/run-lvs.sh`](./mag/run-lvs.sh) and [`./mag/run-drc.sh`](./mag/run-drc.sh).
+
+## Custom Verification
+
+### LVS
+
+In [`./mag`](./mag/), run [`./run-lvs.sh`](./mag/run-lvs.sh). Uses `iic-lvs.sh` from [`osic-multitool`](https://github.com/iic-jku/osic-multitool) included in `iic-osic-tools`.
+
+### DRC
+
+In [`./mag`](./mag/), run [`./run-drc.sh`](./mag/run-drc.sh). Uses `iic-drc.sh` from [`osic-multitool`](https://github.com/iic-jku/osic-multitool) included in `iic-osic-tools`.
+
+### PEX
+
+#### 1. Update `iic-pex.sh`
+
+* Download [this](https://github.com/iic-jku/osic-multitool/blob/2cc13d0c2fab4cbf1a0362a31064ef3f2cddf9b5/iic-pex.sh) version of `iic-pex.sh` from [`osic-multitool`](https://github.com/iic-jku/osic-multitool) and store it as `iic-pex-2cc13d0.sh` in a folder in your `PATH` and make it executable, i.e.,
+    ```
+    cd folder/in/your/PATH
+    chmod +x iic-pex-2cc13d0.sh
+    ```
+*Remarks:*
+* The suffix `2cc13d0` refers to the corrsponding github commit.
+* (only if you use `iic-osic-tools`) I have a permant folder `/foss/designs/bin`, which I add to `PATH` by appending to `/headless/.bashrc` the line
+    ```
+    export PATH=$PATH:/foss/designs/bin
+    ```
+
+#### 2. Generate Netlists
+
+Done with [mag/run-pex.sh](./mag/run-pex.sh). Running
+```
+cd mag
+./run-pex.sh
+```
+will generate the netlists
+```
+mag/pex_C-decoupled/vco.pex.spice
+mag/pex_C-coupled/vco.pex.spice
+mag/pex_full-RC/vco.pex.spice
+```
+These netlists will be used for postlayout simulation.
+
+As reference, you also need to generate the schematic netlist. Open the schematic in xschem:
+```
+cd ./xschem
+xschem vco.sch
+```
+In the menu, activate the flag `Simulation -> LVS -> LVS netlist`. If you have updated your xschem to commit `f850877` or later, activate the flag `Simulation -> LVS -> Top level is a .subckt` instead. Then click the menu button `Netlist`. This will generate the netlist
+```
+xschem/sim/vco.spice
+```
+which will be used for schematic simulation.
+
+#### 3. Run Simulation
+Done with [xschem-pex/run-campaign.sh](./xschem-pex/run-campaign.sh). Execute
+```
+cd xschem-pex
+./run-campaign.sh
+```
+**Attention**: This simulates a lot (currently 1200) configurations, sweeping pex modes, corners, temperature, and bias current values. You may want to edit `run-campaign.sh` to first use shorter value ranges.
+
+The results are stored in `xschem-pex/results`.
+
+#### 4. Visualize Results
+
+Done with [xschem-pex/aggregate-results.py](./xschem-pex/aggregate_results.py) and [xschem-pex/plot_results.py](./xschem-pex/plot_results.py) (thanks ChatGPT for the assistance :) Run
+```
+cd xschem-pex
+python aggregate-results.py
+python plot_results.py
+```
+This generates [./xschem-pex/vco_characterization.csv](./xschem-pex/vco_characterization.csv) and [./xschem-pex/vco_characterization.svg](./xschem-pex/vco_characterization.svg).
+
+#### 5. Issues
+
+Currently, the toplevel subcircuits `vco` in the netlists
+```
+xschem/sim/vco.spice
+mag/pex_C-decoupled/vco.pex.spice
+mag/pex_C-coupled/vco.pex.spice
+mag/pex_full-RC/vco.pex.spice
+```
+have different pin orders for different pex modes, i.e., `C-decoupled` and `C-coupled` netlists are different from the schematic netlist `xschem/sim/vco.spice`, and `full-RC` is different both from `C-decoupled` and `C-coupled` netlists and the schematic netlist. This is currently fixed in [`xschem-pex/run-sim.sh`](./xschem-pex/run-sim.sh) by searching for the different pin orders and substituting them by the schematic pin order.
+
+
+## CACE
+
+### Update CACE
 
 1. Install CACE version `2.4.14` by calling `update-cace 2.4.14` where `update-cace` is the following script:
     ```bash
@@ -40,7 +149,13 @@ The docker image [iic-osic-tools](https://github.com/iic-jku/IIC-OSIC-TOOLS) ver
                 'set top_is_subckt 1',
             ]
     ```
-## Questions Regarding CACE
+### Run CACE
+
+CACE is configured in [`./cace/tt08-analog-vco.yaml`](./cace/tt08-analog-vco.yaml).
+
+Run [`run-cace.sh`](./run-cace.sh). Currently, this will do LVS, DRC, area check, and run simulation for the netlist sources `schematic` and `layout`. Not supported yet are `pex` and `rcx`.
+
+### Questions Regarding CACE
 
 0. CACE is called by [run-cace.sh](./run-cace.sh).
 
@@ -49,64 +164,13 @@ The docker image [iic-osic-tools](https://github.com/iic-jku/IIC-OSIC-TOOLS) ver
     cd cace/templates
     xschem vco_tb.sch
     ```
-    opens `xschem/vco_tb.sch`, not `cace/templates/vco_tb.sch`, because of `cace/templates/xschemrc`.
+    opens `xschem/vco_tb.sch`, not `cace/templates/vco_tb.sch`, because of `cace/templates/xschemrc`. Fixed by
+    ```
+    cd cace/templates
+    xschem ./vco_tb.sch
+    ```
+    To be reported to `xschem`.
+
 2. Plotting: when using condition as xaxis, no lines are drawn. Can this be changed?
 3. Even with `-j 1`, according to `htop`, more than `1` thread is started. Without setting `-j` to a small value, this slows the simulation down, when several configurations are evaluated, as the processes compete for the cores. Is there a way to implement strict cpu affinity? E.g., using `taskset`?
-
-## Manual Design and Verification
-
-### TODOs
-
-* Use `iic-pex.sh` from `iic-osic-tools`.
-* In [tt_um_georgboecherer_vco.pex.sym](./xschem/tt_um_georgboecherer_vco.pex.sym), replace absolute path `spice_sym_def=".include /foss/designs/git/gbsha/tt08-analog-vco/xschem/tt_um_georgboecherer_vco.pex.spice"
-` with relative path.
-
-### Schematics
-
-Schematics were drawn using `xschem` and are placed in [`./xschem`](./xschem/). Files with suffix `_tb.sch` contain testbenches that can be run from the `xschem` GUI.
-
-### Layout
-
-Layout was done using `magic`. Cells were drawn in hierarchical order by the following steps:
-1. Ensure all existing `OLDCELLNAME.mag` files in [`./mag`](./mag) are under version control and comitted.
-2. From `xschem`: generate netlist of `CELLNAME.sch` schematic to be layouted, setting the LVS netlist flag. This generates `CELLNAME.spice` in [`./xschem/sim`](./xschem/sim/).
-3. `cd ./mag/`, then start `magic`. From the menu, import spice netlist.
-4. Close magic. By `git checkout -- OLDCELLNAME.mag` undo all changes that magic has done to existing `OLDCELLNAME.mag` cells.
-5. Add newly created `.mag` files to version control and commit.
-6. Open `CELLNAME.mag`. The cell should now contain all ports, previously layouted cells, and newly added transistors.
-7. Place and wire up as in the tutorial [Analog layout of an op-amp using the Magic VLSI tool](https://youtu.be/XvBpqKwzrFY?si=_2WCLe-FPyDEbQDl).
-8. Add the newly layouted cell to [`./mag/run-lvs.sh`](./mag/run-lvs.sh) and [`./mag/run-drc.sh`](./mag/run-drc.sh).
-
-### Verification
-
-#### LVS
-
-In [`./mag`](./mag/), run [`./run-lvs.sh`](./mag/run-lvs.sh). Uses `iic-lvs.sh` from `iic-osic-tools`.
-
-#### DRC
-
-In [`./mag`](./mag/), run [`./run-drc.sh`](./mag/run-drc.sh). Uses `iic-drc.sh` from `iic-osic-tools`.
-
-#### PEX
-
-TODO: Currently done manually. In [`./mag`](./mag):
-```
-magic tt_um_georgboecherer_vco.mag
-```
-In the magic tcl window:
-```
-extract do resistance
-extract do capacitance
-extract do coupling
-extract all
-ext2spice subcircuit on
-ext2spice hierarchy on
-ext2spice lvs
-ext2spice cthresh 0.01
-ext2spice rthresh 100    
-ext2spice
-```
-* Copy `./mag/tt_um_georgboecherer_vco.spice` to `./xschem/tt_um_georgboecherer_vco.pex.spice`.
-* In `./xschem/tt_um_georgboecherer_vco.pex.spice`, change topcell name from `tt_um_georg.boecherer_vco` to `tt_um_georgboecherer_vco.pex`
-* Test with `xschem tt_tb.sch`.
-
+4. Issues with netlist sources `pex` and `rcx`, to be investigated further.

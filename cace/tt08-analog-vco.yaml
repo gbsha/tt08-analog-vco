@@ -97,8 +97,8 @@ default_conditions:
 
 parameters:
   frequency:
-    description: Measure period in transient simulation
-    display: Measure period in transient simulation
+    description: Measure oscillation frequency in transient simulation
+    display: Measure oscillation frequency in transient simulation
     unit: MHz
     tool:
       ngspice:
