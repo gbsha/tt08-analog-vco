@@ -105,7 +105,7 @@ parameters:
         template: vco_tb.sch
         format: ascii
         suffix: .data
-        variables: [Icont, frequency, Vc, Vb]
+        variables: [null, frequency, Vc, Vb]
     spec:
       frequency:
         display: Frequency
@@ -119,17 +119,14 @@ parameters:
     plot:
       frequency:
         suffix: .svg
-        xaxis: Icont
+        xaxis: icont
         yaxis: frequency
         limits: true
       bias:
         suffix: .svg
-        xaxis: Icont
+        xaxis: icont
         yaxis: [Vc, Vb]
     variables:
-      Icont:
-        display: Icont
-        unit: A
       frequency:
         display: Frequency
         unit: MHz
@@ -143,9 +140,9 @@ parameters:
       icont:
         display: Bias current
         unit: mA
-        enumerate: [0.025, 0.1, 0.175, 0.25]
+        enumerate: [0.025, 0.050, 0.075, 0.100, 0.125, 0.150, 0.175, 0.200, 0.225, 0.250]
       temperature:
-        enumerate: [0, 27, 100]
+        enumerate: [-25.0, 0.0, 27.0, 50.0, 75.0, 100.0]
       corner:
         enumerate: [tt, ss, sf, fs, ff]
 
@@ -191,7 +188,9 @@ parameters:
       drc_errors:
         maximum:
           value: 0
-    tool: magic_drc
+    tool: 
+      magic_drc:
+        gds_flatten: true
 
   klayout_drc_feol:
     description: KLayout DRC feol

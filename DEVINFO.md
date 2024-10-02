@@ -132,45 +132,14 @@ have different pin orders for different pex modes, i.e., `C-decoupled` and `C-co
 
     *TODO: Howto install xschem*
 
-3. Patch CACE by changing the path from `xschem` to `/foss/designs/local/bin/xschem` in 
+3. Ensure the updated `xschem` is used by adding
+    ```bash
+    export PATH=/foss/designs/local/bin:$PATH
     ```
-    /headless/.local/lib/python3.10/site-packages/cace/common/cace_regenerate.py
-    ```
-    The relevant section is this:
-    ```python
-    xschemargs = [
-                '/foss/designs/local/bin/xschem', # xschem
-                '-n',
-                '-s',
-                '-r',
-                '-x',
-                '-q',
-                '--tcl',
-                'set top_is_subckt 1',
-            ]
-    ```
+    to `~/.bashrc`. Note that the newly added path is *prepended*, not appended to PATH. This way, the newly added path is checked first, so in our case, the updated xschem is found first and used. Check whether `which xschem` returns the newly added path.
+
 ### Run CACE
 
 CACE is configured in [`./cace/tt08-analog-vco.yaml`](./cace/tt08-analog-vco.yaml).
 
-Run [`run-cace.sh`](./run-cace.sh). Currently, this will do LVS, DRC, area check, and run simulation for the netlist sources `schematic` and `layout`. Not supported yet are `pex` and `rcx`.
-
-### Questions Regarding CACE
-
-0. CACE is called by [run-cace.sh](./run-cace.sh).
-
-1. Issue editing template testbench:
-    ```
-    cd cace/templates
-    xschem vco_tb.sch
-    ```
-    opens `xschem/vco_tb.sch`, not `cace/templates/vco_tb.sch`, because of `cace/templates/xschemrc`. Fixed by
-    ```
-    cd cace/templates
-    xschem ./vco_tb.sch
-    ```
-    To be reported to `xschem`.
-
-2. Plotting: when using condition as xaxis, no lines are drawn. Can this be changed?
-3. Even with `-j 1`, according to `htop`, more than `1` thread is started. Without setting `-j` to a small value, this slows the simulation down, when several configurations are evaluated, as the processes compete for the cores. Is there a way to implement strict cpu affinity? E.g., using `taskset`?
-4. Issues with netlist sources `pex` and `rcx`, to be investigated further.
+Run [`run-cace.sh`](./run-cace.sh). Currently, this will do LVS, DRC, area check, and run simulation for the netlist sources `schematic` and `layout`. Not supported yet for simulation are `pex` and `rcx`.

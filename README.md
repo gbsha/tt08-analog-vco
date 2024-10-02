@@ -12,8 +12,10 @@ See [Designer information: CACE](./DEVINFO.md#cace) for further information.
 * [Summary](docs/vco.md)
 * [Schematic](docs/vco_schematic.md)
 * [Layout](docs/vco_layout.md)
-
-## Custom Characterization
+* [PEX](docs/vco_pex.md)
+* [RCX](docs/vco_rcx.md)
+ 
+ ## Custom Characterization
 
 See [Designer information: Custom Verification](./DEVINFO.md#custom-verification) for further information.
 
